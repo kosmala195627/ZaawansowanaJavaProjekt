@@ -14,6 +14,7 @@ public class App
         conflictCreator();
 	bednarek();
 	TestBK();
+	karolina();
         
     }
     
@@ -29,5 +30,10 @@ public class App
     {
         System.out.println( "BK test" );
     }
+	
+	    public static void karolina() {
+        System.out.println("test Karolina ");
+    }
+	
     
 }

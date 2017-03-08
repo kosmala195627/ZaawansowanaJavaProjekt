@@ -18,4 +18,9 @@ public class App
     public static void conflictCreator() {
         System.out.println("konflikt test ");
     }
+    
+    public static void bednarek() {
+        System.out.println("Piotrek ");
+    }
+    
 }

@@ -5,6 +5,7 @@ target/
 .factorypath
 .springBeans
 
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

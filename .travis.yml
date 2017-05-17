@@ -1,0 +1,4 @@
+language: java
+sudo: false
+before_script: cd Java2017
+script: mvn clean verify

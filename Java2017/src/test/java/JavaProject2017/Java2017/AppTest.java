@@ -1,4 +1,4 @@
-package test;
+package JavaProject2017.Java2017;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,0 +1,6 @@
+language: java
+sudo: false
+before_script: cd Java2017
+script: mvn clean verify
+notifications:
+    slack: java2017-team:dfsJpyCznsHzcRImJY0iD1aN

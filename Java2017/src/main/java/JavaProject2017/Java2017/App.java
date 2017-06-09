@@ -22,5 +22,7 @@ public class App
       tester.writeJSON(student);
       User student1 = tester.readJSON();
       System.out.println(student1);
+      
+      MongoConnection conn = new MongoConnection();
     }
 }

@@ -8,10 +8,17 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import GUI.Login;
+import GUI.Main;
+
 
 public class App 
 {
     public static void main( String[] args ) throws JsonMappingException, IOException {
+    	
+    	
+    	Main mainWindow = new Main();
+    	Login gui = new Login(mainWindow);
       
         JSONTester tester = new JSONTester();
 		

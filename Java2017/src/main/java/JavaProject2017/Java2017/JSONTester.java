@@ -13,14 +13,13 @@ public class JSONTester {
         
     public void writeJSON(User student) throws JsonGenerationException, JsonMappingException, IOException{
       ObjectMapper mapper = new ObjectMapper();	
-      String jsonString = "{\"id\":195690,\"firstName\":\"Karolina\",\"lastName\":\"Pryk\"}";
+      String jsonString;
      jsonString = mapper.writeValueAsString(student);
      System.out.println("jsonString: " + jsonString);
    }
 
-   public User readJSON() throws JsonParseException, JsonMappingException, IOException{
+   public User readJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
       ObjectMapper mapper = new ObjectMapper();
-      String jsonString = "{\"id\":195690,\"firstName\":\"Karolina\",\"lastName\":\"Pryk\"}";
       User student = student = mapper.readValue(jsonString, User.class);;
       return student;
    }

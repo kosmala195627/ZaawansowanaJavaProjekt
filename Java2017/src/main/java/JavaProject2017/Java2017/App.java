@@ -21,7 +21,6 @@ public class App
     	
     	
     	Main mainWindow = new Main();
-    	Login gui = new Login(mainWindow);
       
         JSONTester tester = new JSONTester();
 		

@@ -1,5 +1,7 @@
 package JavaProject2017.Java2017;
 
+import GUI.Main;
+import GUI.Users;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,12 +18,14 @@ public class App
 {
     public static void main( String[] args ) throws JsonMappingException, IOException {
 
-		
-
+      new Main();
+      
       MongoConnection conn = new MongoConnection();
       
       System.out.println(Collections.usersList.size());
       System.out.println(Collections.projectsList.size());
       System.out.println(Collections.tasksList.size());
+      
+      new Users();
     }
 }

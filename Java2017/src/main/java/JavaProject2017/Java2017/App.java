@@ -20,14 +20,8 @@ public class App
     	Main mainWindow = new Main();
     	Login gui = new Login(mainWindow);
       
-        JSONTester tester = new JSONTester();
+  
 		
-      User student = new User();
-      student.setId(195690);
-      student.setFirstName("Karolina");
-      student.setLastName("Pryk");
-      tester.writeJSON(student);
-      User student1 = tester.readJSON();
-      System.out.println(student1);
+     
     }
 }

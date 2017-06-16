@@ -2,17 +2,8 @@ package JavaProject2017.Java2017;
 
 import GUI.Main;
 import GUI.Users;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import static java.util.Collections.list;
-import java.util.List;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
 
 public class App 
 {
@@ -22,10 +13,12 @@ public class App
       
       MongoConnection conn = new MongoConnection();
       
-      System.out.println(Collections.usersList.size());
-      System.out.println(Collections.projectsList.size());
-      System.out.println(Collections.tasksList.size());
-      
+      conn.insertUser(222221, "Jan", "Kowalski", "jkowalski", "1q2w3e4r");
+      conn.readUsers();
+      conn.updateUsers("lastName", "Kowalski", "Nowak");
+      conn.readUsers();
+      conn.removeUser(222221);
+      conn.readUsers();
       new Users();
     }
 }

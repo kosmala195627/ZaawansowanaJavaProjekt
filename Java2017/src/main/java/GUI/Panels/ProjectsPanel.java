@@ -7,8 +7,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 public class ProjectsPanel extends JPanel{
 
@@ -69,20 +72,55 @@ public class ProjectsPanel extends JPanel{
         projectLeaderPanel.add(leaderField);
         
    //// project participants
-        /*
+        
         JPanel projectParticipantsPanel = new JPanel();
-        projectParticipantsPanel.setLayout(new BoxLayout(projectLeaderPanel, BoxLayout.X_AXIS));
+        projectParticipantsPanel.setLayout(new BoxLayout(projectParticipantsPanel, BoxLayout.X_AXIS));
         projectParticipantsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        this.add(projectLeaderPanel);
+        this.add(projectParticipantsPanel);
         
-		JLabel leaderLbl = new JLabel();
-		leaderLbl.setText("Leader: ");
-		leaderLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-        projectLeaderPanel.add(leaderLbl);
+		JLabel participantsLbl = new JLabel();
+		participantsLbl.setText("Participants: ");
+		participantsLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+		projectParticipantsPanel.add(participantsLbl);
         
-        JTextField leaderField = new JTextField(100);
-        leaderField.setMaximumSize(new Dimension(350,25));
-        projectLeaderPanel.add(leaderField);*/
+        String[] data = {"aaaa", "bbbb","cccc","ddd"};
+        JList participantsList = new JList(data); //data has type Object[]
+        participantsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        participantsList.setLayoutOrientation(JList.VERTICAL);
+        participantsList.setVisibleRowCount(-1);
+        
+        JScrollPane listScroller = new JScrollPane(participantsList);
+        listScroller.setMaximumSize(new Dimension(320, 100));
+        projectParticipantsPanel.add(listScroller);
+        
+        
+   //// Add remove project participants
+        
+        JPanel removeOrAddParticipants = new JPanel();
+        removeOrAddParticipants.setLayout(new BoxLayout(removeOrAddParticipants, BoxLayout.X_AXIS));
+        removeOrAddParticipants.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        this.add(removeOrAddParticipants);
+      
+        JButton removeBtn = new JButton("Remove");
+        removeOrAddParticipants.add(removeBtn);
+        
+		JLabel emptyLbl = new JLabel(" ");
+		emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+		removeOrAddParticipants.add(emptyLbl);
+        
+        JButton addBtn = new JButton("   Add   ");
+        removeOrAddParticipants.add(addBtn);
+        /*
+   //// Project task list
+        
+        JPanel projectTaskList = new JPanel();
+        projectTaskList.setLayout(new BoxLayout(projectTaskList, BoxLayout.Y_AXIS));
+        projectTaskList.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        this.add(projectTaskList);
+        
+		JLabel taskLbl = new JLabel(" ");
+		emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+		projectTaskList.add(emptyLbl);*/
         
 	}
 }

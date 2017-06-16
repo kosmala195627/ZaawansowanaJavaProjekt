@@ -52,8 +52,8 @@ public class Users extends JFrame implements ActionListener {
 	tTable.setModel(model);
 	tTable.setPreferredScrollableViewportSize(new Dimension(550,400));
 	tTable.setFillsViewportHeight(true);
-        tTable.setCellSelectionEnabled(true);
-        tTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    tTable.setCellSelectionEnabled(true);
+    tTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 selectedUser=Collections.usersList.get(tTable.getSelectedRow());

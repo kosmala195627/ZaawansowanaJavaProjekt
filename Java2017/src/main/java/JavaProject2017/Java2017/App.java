@@ -20,8 +20,6 @@ import GUI.Main;
 public class App 
 {
     public static void main( String[] args ) throws JsonMappingException, IOException {
-
-      new Main();
       
       MongoConnection conn = new MongoConnection();
       
@@ -29,6 +27,7 @@ public class App
       System.out.println(Collections.projectsList.size());
       System.out.println(Collections.tasksList.size());
       
+      new Main();
       new Users();
     }
 }

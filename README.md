@@ -30,10 +30,12 @@ MongoDB:
 2) TWORZENIE BAZY
 	-W konsoli Mongo wpisujemy polecenie: use Java2017
 	Polecenie to tworzy bazę o nazwie Java2017 i przełącza nas w obszar tej bazy.
-	-Kopiujemy plik users-collection.json do katalogu C:\Program Files\MongoDB\Server\3.4
+	-Kopiujemy pliki: users-collection.json, projects-collection.json oraz tasks-collection.json do katalogu C:\Program Files\MongoDB\Server\3.4
 	-Otwieramy drugie okno terminala jako Administrator
 	-W terminalu przechodzimy do katalogu C:\Program Files\MongoDB\Server\3.4 i wpisyjemy polecenie:
 		mongoimport -d Java2017 -c users --file users-collection.json
+		mongoimport -d Java2017 -c projects --file projects-collection.json
+		mongoimport -d Java2017 -c tasks --file tasks-collection.json
 	Pozwoli nam to importować dane do kolekcji "users" 
 	
-3) Uruchamiamy program w naszym IDE. Testowo zostają wypisane dane użytkownika o podanym id
+3) Uruchamiamy program w naszym IDE

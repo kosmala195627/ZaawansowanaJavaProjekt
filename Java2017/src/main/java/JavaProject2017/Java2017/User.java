@@ -2,7 +2,7 @@ package JavaProject2017.Java2017;
 
 
 public class User {
-    private String mongoId;
+    private String _id;
     private int id;
     private String firstName;
     private String lastName;
@@ -13,12 +13,12 @@ public class User {
         
     }
     
-    public String getMongoId () {
-        return mongoId;
+    public String get_id () {
+        return _id;
     }
     
-    public void setMongoId (String mongoId) {
-        this.mongoId = mongoId;
+    public void set_id (String _id) {
+        this._id = _id;
     }
     
     public int getId () {
@@ -63,6 +63,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User { mongoId: "+ mongoId + "id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", login: " + login + ", password: " + password + " }";
+        return "User { _id: "+ _id + ", id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", login: " + login + ", password: " + password + " }";
     }
 }

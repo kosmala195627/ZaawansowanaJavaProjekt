@@ -1,5 +1,7 @@
 package JavaProject2017.Java2017;
 
+import GUI.Main;
+import GUI.Users;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,25 +20,15 @@ import GUI.Main;
 public class App 
 {
     public static void main( String[] args ) throws JsonMappingException, IOException {
-    	
-    	
-    	Main mainWindow = new Main();
-      
-        JSONTester tester = new JSONTester();
-		
-      User student = new User();
-      student.setId(195690);
-      student.setFirstName("Karolina");
-      student.setLastName("Pryk");
-      tester.writeJSON(student);
-      //String jsonString = "{\"id\":195690,\"firstName\":\"Karolina\",\"lastName\":\"Pryk\"}";
-      //User student1 = tester.readJSON(jsonString);
-      //System.out.println(student1);
+
+      new Main();
       
       MongoConnection conn = new MongoConnection();
       
-      List<User> usersList = new ArrayList<User>();
-      List<Project> projectsList = new ArrayList<Project>();
-      List<Task> tasksList = new ArrayList<Task>();
+      System.out.println(Collections.usersList.size());
+      System.out.println(Collections.projectsList.size());
+      System.out.println(Collections.tasksList.size());
+      
+      new Users();
     }
 }

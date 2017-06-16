@@ -4,16 +4,25 @@ import java.util.Date;
 
 
 public class Task {
+    private String _id;
     private int taskId;
     private String name;
     private Date startDate;
-    private Date endDate;
+    private Date endDate = null;
     private int projectId;
     private int managerId;
     private boolean status = false;
     
     public Task() {
         
+    }
+    
+    public String get_id () {
+        return _id;
+    }
+    
+    public void set_id (String _id) {
+        this._id = _id;
     }
     
     public int getTaskId () {
@@ -24,11 +33,11 @@ public class Task {
         this.taskId = taskId;
     }
     
-    public String getTaskName () {
+    public String getName () {
         return name;
     }
     
-    public void setTaskName (String name) {
+    public void setName (String name) {
         this.name = name;
     }
     
@@ -52,7 +61,7 @@ public class Task {
         return projectId;
     }
     
-    public void setprojectId (int projectId) {
+    public void setProjectId (int projectId) {
         this.projectId = projectId;
     }
     
@@ -68,7 +77,12 @@ public class Task {
         return status;
     }
     
-    public void setStatus (boolean ststus) {
-        this.status = ststus;
+    public void setStatus (boolean status) {
+        this.status = status;
+    }
+    
+    @Override
+    public String toString() {
+        return "Task { _id: "+ _id + ", taskId: " + taskId + ", name: " + name + ", startDate: " + startDate + ", endDate: " + endDate + ", projectId: " + projectId + ", managerId: " + managerId + ", status: " + status +" }";
     }
 }

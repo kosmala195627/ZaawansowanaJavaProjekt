@@ -18,9 +18,33 @@ public class JSONTester {
      System.out.println("jsonString: " + jsonString);
    }
 
-   public User readJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
+   public User readUsersJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
       ObjectMapper mapper = new ObjectMapper();
-      User student = student = mapper.readValue(jsonString, User.class);;
+      jsonString = jsonString.replace(" { \"$oid\" : "," ");
+      jsonString = jsonString.replace("} ,"," ,");
+      User student = mapper.readValue(jsonString, User.class);;
+      System.out.println(student.toString());
+      Collections.usersList.add(student);
       return student;
+   }
+   
+   public Project readProjectsJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
+      ObjectMapper mapper = new ObjectMapper();
+      jsonString = jsonString.replace(" { \"$oid\" : "," ");
+      jsonString = jsonString.replace("} ,"," ,");
+      Project project = mapper.readValue(jsonString, Project.class);
+      System.out.println(project.toString());
+      Collections.projectsList.add(project);
+      return project;
+   }
+   
+   public Task readTasksJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
+      ObjectMapper mapper = new ObjectMapper();
+      jsonString = jsonString.replace(" { \"$oid\" : "," ");
+      jsonString = jsonString.replace("} ,"," ,");
+      Task task = mapper.readValue(jsonString, Task.class);
+      System.out.println(task.toString());
+      Collections.tasksList.add(task);
+      return task;
    }
 }

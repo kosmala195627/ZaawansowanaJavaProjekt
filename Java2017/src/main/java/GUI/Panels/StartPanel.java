@@ -8,7 +8,7 @@ public class StartPanel extends JPanel{
 	public StartPanel()
 	{
 		JLabel label1 = new JLabel();
-        label1.setText("You are in area of Tab1");
+        label1.setText("Start Panel ");
         this.add(label1);
 		
 	}

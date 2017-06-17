@@ -7,8 +7,12 @@ public class Project {
     private String name;
     private int leaderId;
     
-    public Project() {
-        
+    public Project () {}
+    
+    public Project(int projectId, String name, int leaderId) {
+        this.projectId = projectId;
+        this.name = name;
+        this.leaderId = leaderId;
     }
     
     public String get_id () {

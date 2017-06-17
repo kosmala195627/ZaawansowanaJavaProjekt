@@ -66,36 +66,36 @@ public class MongoConnection {
     /**
      * * ** Insert new data to DB***
      */
-    public void insertUser(int id, String firstName, String lastName, String login, String password) {
+    public void insertUser(User user) {
         Collections.usersList.clear();
         BasicDBObject document = new BasicDBObject();
-        document.put("id", id);
-        document.put("firstName", firstName);
-        document.put("lastName", lastName);
-        document.put("login", login);
-        document.put("password", password);
+        document.put("id", user.getId());
+        document.put("firstName", user.getFirstName());
+        document.put("lastName", user.getLastName());
+        document.put("login", user.getLogin());
+        document.put("password", user.getPassword());
         usersCollection.insert(document);
     }
 
-    public void insertProject(int projectId, String name, int leaderId) {
+    public void insertProject(Project project) {
         Collections.projectsList.clear();
         BasicDBObject document = new BasicDBObject();
-        document.put("projectId", projectId);
-        document.put("name", name);
-        document.put("leaderId", leaderId);
+        document.put("projectId", project.getProjectId());
+        document.put("name", project.getName());
+        document.put("leaderId", project.getLeaderId());
         projectsCollection.insert(document);
     }
 
-    public void insertTask(int taskId, String name, Date startDate, Date endDate, int projectId, int managerId, boolean status) {
+    public void insertTask(Task task) {
         Collections.tasksList.clear();
         BasicDBObject document = new BasicDBObject();
-        document.put("taskId", taskId);
-        document.put("name", name);
-        document.put("startDate", startDate);
-        document.put("endDate", endDate);
-        document.put("projectId", projectId);
-        document.put("managerId", managerId);
-        document.put("status", status);
+        document.put("taskId", task.getTaskId());
+        document.put("name", task.getName());
+        document.put("startDate", task.getStartDate());
+        document.put("endDate", task.getEndDate());
+        document.put("projectId", task.getProjectId());
+        document.put("managerId", task.getManagerId());
+        document.put("status", task.getStatus());
         tasksCollection.insert(document);
     }
 
@@ -143,25 +143,51 @@ public class MongoConnection {
 
         tasksCollection.update(query, updateObj);
     }
-    
-    public void removeUser (int userId) {
-        Collections.usersList.clear();
-        BasicDBObject document = new BasicDBObject();
-        document.put("id", userId);
-        usersCollection.remove(document);
+
+    public <T> void updateInDB(Class<T> obj, String whichField, String oldValue, String newValue) {
+        BasicDBObject query = new BasicDBObject();
+        BasicDBObject newDocument = new BasicDBObject();
+        BasicDBObject updateObj = new BasicDBObject();
+
+        if (obj.isAssignableFrom(User.class)) {
+            Collections.usersList.clear();
+            query.put(whichField, oldValue);
+            newDocument.put(whichField, newValue);
+            updateObj.put("$set", newDocument);
+            usersCollection.update(query, updateObj);
+        } else if (obj.isAssignableFrom(Project.class)) {
+            Collections.projectsList.clear();
+            query.put(whichField, oldValue);
+            newDocument.put(whichField, newValue);
+            updateObj.put("$set", newDocument);
+            projectsCollection.update(query, updateObj);
+        } else if (obj.isAssignableFrom(Task.class)) {
+            Collections.tasksList.clear();
+            query.put(whichField, oldValue);
+            newDocument.put(whichField, newValue);
+            updateObj.put("$set", newDocument);
+            tasksCollection.update(query, updateObj);
+        }
     }
-    
-    public void removeProject (int projectId) {
-        Collections.projectsList.clear();
+
+    /**
+     * * ** Remove from DB***
+     */
+    public <T> void removeFromDB(Class<T> obj, int idValue) {
         BasicDBObject document = new BasicDBObject();
-        document.put("projectId", projectId);
-        projectsCollection.remove(document);
-    }
-    
-    public void removeTask (int taskId) {
-        Collections.tasksList.clear();
-        BasicDBObject document = new BasicDBObject();
-        document.put("taskId", taskId);
-        tasksCollection.remove(document);
+        if (obj.isAssignableFrom(User.class)) {
+            Collections.usersList.clear();
+            document.put("id", idValue);
+            usersCollection.remove(document);
+        } else if (obj.isAssignableFrom(Project.class)) {
+            Collections.projectsList.clear();
+            document.put("projectId", idValue);
+            projectsCollection.remove(document);
+        } else if (obj.isAssignableFrom(Task.class)) {
+            Collections.tasksList.clear();
+            document.put("taskId", idValue);
+            tasksCollection.remove(document);
+        }
+
     }
 }

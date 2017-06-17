@@ -10,11 +10,21 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import GUI.TableOfTasks;
+import GUI.TableOfUsers;
+import JavaProject2017.Java2017.Collections;
+import JavaProject2017.Java2017.User;
 
 public class ProjectsPanel extends JPanel{
 
+	User selectedUser;
+	
 	public ProjectsPanel()
 	{
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -93,34 +103,68 @@ public class ProjectsPanel extends JPanel{
         listScroller.setMaximumSize(new Dimension(320, 100));
         projectParticipantsPanel.add(listScroller);
         
+		JLabel empty0Lbl = new JLabel(" ");
+		empty0Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+		projectParticipantsPanel.add(empty0Lbl);
         
-   //// Add remove project participants
-        
-        JPanel removeOrAddParticipants = new JPanel();
-        removeOrAddParticipants.setLayout(new BoxLayout(removeOrAddParticipants, BoxLayout.X_AXIS));
-        removeOrAddParticipants.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        this.add(removeOrAddParticipants);
-      
         JButton removeBtn = new JButton("Remove");
-        removeOrAddParticipants.add(removeBtn);
+        projectParticipantsPanel.add(removeBtn);
         
 		JLabel emptyLbl = new JLabel(" ");
 		emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
-		removeOrAddParticipants.add(emptyLbl);
+		projectParticipantsPanel.add(emptyLbl);
         
         JButton addBtn = new JButton("   Add   ");
-        removeOrAddParticipants.add(addBtn);
-        /*
+        projectParticipantsPanel.add(addBtn);
+              
    //// Project task list
-        
-        JPanel projectTaskList = new JPanel();
-        projectTaskList.setLayout(new BoxLayout(projectTaskList, BoxLayout.Y_AXIS));
-        projectTaskList.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        this.add(projectTaskList);
-        
-		JLabel taskLbl = new JLabel(" ");
-		emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
-		projectTaskList.add(emptyLbl);*/
-        
+
+		JLabel empty2Lbl = new JLabel(" ");
+		empty2Lbl.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 20));
+		this.add(empty2Lbl);
+		
+		TableOfTasks model = new TableOfTasks();
+		model.add();
+		final JTable tTable = new JTable();
+		tTable.setModel(model);
+		tTable.setPreferredScrollableViewportSize(new Dimension(600,200));
+		tTable.setFillsViewportHeight(true);
+	        tTable.setCellSelectionEnabled(true);
+	        tTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+	            public void valueChanged(ListSelectionEvent e) {
+	                selectedUser=Collections.usersList.get(tTable.getSelectedRow());
+	                System.out.println(selectedUser.getLastName());
+	            }
+	        });
+		JScrollPane spPane = new JScrollPane(tTable);
+		spPane.setMaximumSize(new Dimension(600,200));
+		this.add(spPane);
+		
+    /// buttons Panel
+		
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        this.add(buttonsPanel);
+		
+        JButton addbtn = new JButton("Add task");
+		buttonsPanel.add(addbtn);
+		
+		JLabel space1Lbl = new JLabel();
+		space1Lbl.setText(" ");
+		space1Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+		buttonsPanel.add(space1Lbl);
+	        
+		JButton updateBtn = new JButton("Update task");
+		buttonsPanel.add(updateBtn);	
+		
+		JLabel space2Lbl = new JLabel();
+		space2Lbl.setText(" ");
+		space2Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+		buttonsPanel.add(space2Lbl);
+	        
+		JButton deleteBtn = new JButton("Delete task");
+		buttonsPanel.add(deleteBtn);	      
 	}
 }

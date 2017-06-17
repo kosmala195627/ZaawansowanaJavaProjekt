@@ -58,7 +58,7 @@ public class ProjectsPanel extends JPanel{
         
 		JLabel nameLbl = new JLabel();
 		nameLbl.setText("Name:   ");
-        nameLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+        nameLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 30));
         projectNamePanel.add(nameLbl);
         
         JTextField nameField = new JTextField(100);
@@ -73,13 +73,14 @@ public class ProjectsPanel extends JPanel{
         this.add(projectLeaderPanel);
         
 		JLabel leaderLbl = new JLabel();
-		leaderLbl.setText("Leader: ");
-		leaderLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+		leaderLbl.setText("   Leader: ");
+		leaderLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 30));
         projectLeaderPanel.add(leaderLbl);
         
-        JTextField leaderField = new JTextField(100);
-        leaderField.setMaximumSize(new Dimension(350,25));
-        projectLeaderPanel.add(leaderField);
+        JComboBox leaderCmbBox = new JComboBox();
+        leaderCmbBox.setMaximumSize(new Dimension(360,25));
+        leaderCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+        projectLeaderPanel.add(leaderCmbBox);
         
    //// project participants
         

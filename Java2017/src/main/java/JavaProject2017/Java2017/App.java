@@ -1,33 +1,24 @@
 package JavaProject2017.Java2017;
 
 import GUI.Main;
-import GUI.Users;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import static java.util.Collections.list;
-import java.util.List;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-
-import GUI.Login;
-import GUI.Main;
-
 
 public class App 
 {
     public static void main( String[] args ) throws JsonMappingException, IOException {
       
       MongoConnection conn = new MongoConnection();
-      
-      System.out.println(Collections.usersList.size());
-      System.out.println(Collections.projectsList.size());
-      System.out.println(Collections.tasksList.size());
-      
+      User user = new User(222221, "Jan", "Kowalski", "jkowalski", "1q2w3e4r");
+      //conn.insertUser(user);
+      //conn.readUsers();
+      //conn.updateUsers("lastName", "Kowalski", "Nowak");
+      conn.updateInDB(user.getClass(), "lastName", "Kowalski", "Nowak");
+      conn.readUsers();
+      //conn.removeFromDB(user.getClass(), user.getId());
+      //conn.readUsers();
       new Main();
-      new Users();
+
     }
 }

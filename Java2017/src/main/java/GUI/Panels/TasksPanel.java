@@ -63,10 +63,9 @@ public class TasksPanel extends JPanel{
         managerPanel.add(managerLbl);
         managerPanel.setAlignmentX( Component.LEFT_ALIGNMENT );
         
-        JComboBox managerCmbBox = new JComboBox();
-        managerCmbBox.setMaximumSize(new Dimension(400,25));
-        managerCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-        managerPanel.add(managerCmbBox);
+        JTextField managerField = new JTextField(100);
+        managerField.setMaximumSize(new Dimension(380,25));
+        managerPanel.add(managerField);
 		      
    //// task name and activity
         
@@ -136,33 +135,62 @@ public class TasksPanel extends JPanel{
 		responsibilityLbl.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 20));
 		responsibilityPanel.add(responsibilityLbl);
 		responsibilityPanel.setAlignmentX( Component.LEFT_ALIGNMENT );
+		
+        JComboBox leaderCmbBox = new JComboBox();
+        leaderCmbBox.setMaximumSize(new Dimension(360,25));
+        leaderCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+        responsibilityPanel.add(leaderCmbBox);
+       
+        
+		JLabel empty4Lbl = new JLabel();
+		empty4Lbl.setText(" ");
+		empty4Lbl.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+		this.add(empty4Lbl);
+		
+		
+   //// task all members
+        
+        JPanel membersPanel = new JPanel();
+        membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.X_AXIS));
+        membersPanel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
+        this.add(membersPanel);
+        
+		JLabel membersLbl = new JLabel();
+		membersLbl.setText("All task members:   ");
+		membersLbl.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 42));
+		membersPanel.add(membersLbl);
+		membersPanel.setAlignmentX( Component.LEFT_ALIGNMENT );
         
         String[] data = {"aaaa", "bbbb","cccc","ddd"};
         JList responsibilityList = new JList(data); //data has type Object[]
+        responsibilityList.setMaximumSize(new Dimension(320, 150));
+        responsibilityList.setMinimumSize(new Dimension(320, 150));
         responsibilityList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         responsibilityList.setLayoutOrientation(JList.VERTICAL);
         responsibilityList.setVisibleRowCount(-1);
         
         JScrollPane listScroller = new JScrollPane(responsibilityList);
-        listScroller.setMaximumSize(new Dimension(320, 100));
-        responsibilityPanel.add(listScroller);
+        listScroller.setMaximumSize(new Dimension(320, 150));
+        listScroller.setMinimumSize(new Dimension(320, 150));
+        membersPanel.add(listScroller);
 		
 		JLabel space2Lbl = new JLabel();
 		space2Lbl.setText(" ");
 		space2Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-		responsibilityPanel.add(space2Lbl);
+		membersPanel.add(space2Lbl);
         
 		JButton bAdd = new JButton("Add");
-		responsibilityPanel.add(bAdd);
+		membersPanel.add(bAdd);
 		
 		JLabel space3Lbl = new JLabel();
 		space3Lbl.setText(" ");
 		space3Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-		responsibilityPanel.add(space3Lbl);
+		membersPanel.add(space3Lbl);
 	        
 		JButton bDelete = new JButton("Remove");
-		responsibilityPanel.add(bDelete);	
-        
+		membersPanel.add(bDelete);	
+    	
+		
    //// task create
         
         JPanel createButtonPanel = new JPanel();
@@ -173,7 +201,7 @@ public class TasksPanel extends JPanel{
         
         JLabel space4Lbl = new JLabel();
 		space4Lbl.setText(" ");
-		space4Lbl.setBorder(BorderFactory.createEmptyBorder(200, 320, 0 , 0));
+		space4Lbl.setBorder(BorderFactory.createEmptyBorder(100, 320, 0 , 0));
 		createButtonPanel.add(space4Lbl);
         
 		JButton createNewBtn = new JButton("Create new task");

@@ -13,7 +13,9 @@ public class Task {
     private int managerId;
     private boolean status = false;
     
-    public Task() {
+    public Task () {}
+    
+    public Task(int taskId, String name, Date startDate, Date endDate, int projectId, int managerId, boolean status) {
         
     }
     

@@ -1,6 +1,5 @@
 package JavaProject2017.Java2017;
 
-import java.io.File;
 import java.io.IOException;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
@@ -46,5 +45,15 @@ public class JSONTester {
       System.out.println(task.toString());
       Collections.tasksList.add(task);
       return task;
+   }
+   
+   public TaskUser readTasksUsersJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
+      ObjectMapper mapper = new ObjectMapper();
+      jsonString = jsonString.replace(" { \"$oid\" : "," ");
+      jsonString = jsonString.replace("} ,"," ,");
+      TaskUser taskUser = mapper.readValue(jsonString, TaskUser.class);
+      System.out.println(taskUser.toString());
+      Collections.tasksUsersList.add(taskUser);
+      return taskUser;
    }
 }

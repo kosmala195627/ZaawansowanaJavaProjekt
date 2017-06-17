@@ -1,4 +1,4 @@
-package JavaProject2017.Java2017;
+package Database.Models;
 
 
 public class User {

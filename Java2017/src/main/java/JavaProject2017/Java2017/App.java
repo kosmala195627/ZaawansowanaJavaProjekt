@@ -3,7 +3,9 @@ package JavaProject2017.Java2017;
 import GUI.Main;
 import java.io.IOException;
 import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import Database.MongoConnection;
+import Database.Models.User;
 
 public class App 
 {
@@ -19,6 +21,5 @@ public class App
       //conn.removeFromDB(user.getClass(), user.getId());
       //conn.readUsers();
       new Main();
-
     }
 }

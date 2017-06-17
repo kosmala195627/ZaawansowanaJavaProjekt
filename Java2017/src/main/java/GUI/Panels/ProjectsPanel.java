@@ -16,10 +16,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Database.Collections;
+import Database.Models.User;
 import GUI.TableOfTasks;
 import GUI.TableOfUsers;
-import JavaProject2017.Java2017.Collections;
-import JavaProject2017.Java2017.User;
 
 public class ProjectsPanel extends JPanel{
 

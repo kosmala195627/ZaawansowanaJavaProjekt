@@ -1,10 +1,16 @@
-package JavaProject2017.Java2017;
+package Database;
 
 import java.io.IOException;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import Database.Models.Project;
+import Database.Models.Task;
+import Database.Models.TaskUser;
+import Database.Models.User;
+
 
 
 public class JSONTester {

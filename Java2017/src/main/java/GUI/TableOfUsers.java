@@ -1,8 +1,9 @@
 package GUI;
 
-import JavaProject2017.Java2017.Collections;
-import JavaProject2017.Java2017.User;
 import javax.swing.table.DefaultTableModel;
+
+import Database.Collections;
+import Database.Models.User;
 
 /*
     Klasa odpowiedzialna za stworzenie tabeli zawierajacej uzytkownikow

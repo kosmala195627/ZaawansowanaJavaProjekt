@@ -1,4 +1,4 @@
-package JavaProject2017.Java2017;
+package Database.Models;
 
 import java.util.Date;
 

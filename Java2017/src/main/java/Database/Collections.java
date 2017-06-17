@@ -1,8 +1,13 @@
-package JavaProject2017.Java2017;
+package Database;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Database.Models.Project;
+import Database.Models.Task;
+import Database.Models.TaskUser;
+import Database.Models.User;
 
 
 public class Collections {

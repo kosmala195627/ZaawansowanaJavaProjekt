@@ -1,4 +1,4 @@
-package JavaProject2017.Java2017;
+package Database;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -7,6 +7,12 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+
+import Database.Models.Project;
+import Database.Models.Task;
+import Database.Models.TaskUser;
+import Database.Models.User;
+
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -14,7 +20,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 public class MongoConnection {
 
-    DBCollection usersCollection, projectsCollection, tasksCollection, tasksUsersCollection;
+    private DBCollection usersCollection, projectsCollection, tasksCollection, tasksUsersCollection;
     JSONTester test = new JSONTester();
     MongoClient mongo = new MongoClient("localhost", 27017);
     DB db = mongo.getDB("Java2017");
@@ -173,4 +179,6 @@ public class MongoConnection {
         }
 
     }
+    
+    public 
 }

@@ -29,7 +29,6 @@ public class LoginEvents implements ActionListener {
             		
             String userLogin = this.loginWindow.getLoginField().getText();            
             User user = loginService.getUserByLogin(userLogin);
-            System.out.println(user);
             
             if (user == null) {
                 JOptionPane.showMessageDialog(new Frame(), "No such user in the system, please create account");

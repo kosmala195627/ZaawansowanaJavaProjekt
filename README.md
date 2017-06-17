@@ -36,6 +36,7 @@ MongoDB:
 		mongoimport -d Java2017 -c users --file users-collection.json
 		mongoimport -d Java2017 -c projects --file projects-collection.json
 		mongoimport -d Java2017 -c tasks --file tasks-collection.json
-	Pozwoli nam to importować dane do kolekcji "users" 
+		mongoimport -d Java2017 -c taskUsers --file taskUsers-collection.json
+	Pozwoli nam to importować dane do kolekcji w programie.
 	
 3) Uruchamiamy program w naszym IDE

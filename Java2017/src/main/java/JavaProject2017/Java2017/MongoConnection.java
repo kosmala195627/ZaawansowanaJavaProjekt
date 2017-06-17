@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 public class MongoConnection {
 
-    DBCollection usersCollection, projectsCollection, tasksCollection;
+    DBCollection usersCollection, projectsCollection, tasksCollection, tasksUsersCollection;
     JSONTester test = new JSONTester();
     MongoClient mongo = new MongoClient("localhost", 27017);
     DB db = mongo.getDB("Java2017");
@@ -24,6 +24,7 @@ public class MongoConnection {
             readUsers();
             readProjects();
             readTasks();
+            readTasksUsers();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (MongoException e) {
@@ -62,6 +63,16 @@ public class MongoConnection {
             test.readTasksJSON(obj.toString());
         }
     }
+    
+    public void readTasksUsers() throws JsonMappingException, IOException {
+        tasksUsersCollection = db.getCollection("taskUsers");
+        DBCursor cursor3 = tasksUsersCollection.find();
+        while (cursor3.hasNext()) {
+            DBObject obj = cursor3.next();
+            System.out.println(obj.toString());
+            test.readTasksUsersJSON(obj.toString());
+        }
+    }
 
     /**
      * * ** Insert new data to DB***
@@ -98,52 +109,18 @@ public class MongoConnection {
         document.put("status", task.getStatus());
         tasksCollection.insert(document);
     }
+    
+    public void insertTaskUser(TaskUser taskUser) {
+        Collections.tasksUsersList.clear();
+        BasicDBObject document = new BasicDBObject();
+        document.put("userId", taskUser.getUserId());
+        document.put("taskId", taskUser.getTaskId());
+        tasksUsersCollection.insert(document);
+    }
 
     /**
      * * ** Update data in DB***
      */
-    public void updateUsers(String whichField, String oldValue, String newValue) {
-        Collections.usersList.clear();
-        BasicDBObject query = new BasicDBObject();
-        query.put(whichField, oldValue);
-
-        BasicDBObject newDocument = new BasicDBObject();
-        newDocument.put(whichField, newValue);
-
-        BasicDBObject updateObj = new BasicDBObject();
-        updateObj.put("$set", newDocument);
-
-        usersCollection.update(query, updateObj);
-    }
-
-    public void updateProjects(String whichField, String oldValue, String newValue) {
-        Collections.projectsList.clear();
-        BasicDBObject query = new BasicDBObject();
-        query.put(whichField, oldValue);
-
-        BasicDBObject newDocument = new BasicDBObject();
-        newDocument.put(whichField, newValue);
-
-        BasicDBObject updateObj = new BasicDBObject();
-        updateObj.put("$set", newDocument);
-
-        projectsCollection.update(query, updateObj);
-    }
-
-    public void updateTasks(String whichField, String oldValue, String newValue) {
-        Collections.tasksList.clear();
-        BasicDBObject query = new BasicDBObject();
-        query.put(whichField, oldValue);
-
-        BasicDBObject newDocument = new BasicDBObject();
-        newDocument.put(whichField, newValue);
-
-        BasicDBObject updateObj = new BasicDBObject();
-        updateObj.put("$set", newDocument);
-
-        tasksCollection.update(query, updateObj);
-    }
-
     public <T> void updateInDB(Class<T> obj, String whichField, String oldValue, String newValue) {
         BasicDBObject query = new BasicDBObject();
         BasicDBObject newDocument = new BasicDBObject();
@@ -167,6 +144,12 @@ public class MongoConnection {
             newDocument.put(whichField, newValue);
             updateObj.put("$set", newDocument);
             tasksCollection.update(query, updateObj);
+        } else if (obj.isAssignableFrom(TaskUser.class)) {
+            Collections.tasksUsersList.clear();
+            query.put(whichField, oldValue);
+            newDocument.put(whichField, newValue);
+            updateObj.put("$set", newDocument);
+            tasksUsersCollection.update(query, updateObj);
         }
     }
 

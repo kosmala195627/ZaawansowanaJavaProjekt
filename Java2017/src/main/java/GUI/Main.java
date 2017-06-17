@@ -7,7 +7,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import GUI.Panels.ProjectsPanel;
+import GUI.Panels.StartPanel;
+import GUI.Panels.TasksPanel;
+import GUI.Panels.UsersPanel;
 
 public class Main extends JFrame{
 	
@@ -20,18 +31,31 @@ public class Main extends JFrame{
 		
 		// main window class
 		setResizable(false);
-		Container c = getContentPane(); 
-		//setSize(240, 240);
 		setMinimumSize(new Dimension(800,600));
 		setTitle("JAVA 2017 - Project");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c.setLayout(null);
 		
+        final JTabbedPane tabbedPanel = new JTabbedPane();
+        getContentPane().add(tabbedPanel);
+        StartPanel start = new StartPanel();     
+        tabbedPanel.addTab("Start", start);
+        ProjectsPanel projects = new ProjectsPanel();     
+        tabbedPanel.addTab("Projects", projects);
+        TasksPanel tasks = new TasksPanel();     
+        tabbedPanel.addTab("Tasks", tasks);
+        UsersPanel users = new UsersPanel();     
+        tabbedPanel.addTab("Users", users);
+		
+        
+        // to allow signOut
 		signOutBtn = new JButton("Sign out");
-		signOutBtn.setBounds(650, 10, 140, 30);
-		c.add(signOutBtn);
-		
-		
+       
+        final JPanel signOutPanel = new JPanel();
+        JLabel signOutLabel = new JLabel("Please confirm.    ");
+        signOutPanel.add(signOutLabel);
+        signOutPanel.add(signOutBtn);
+        tabbedPanel.addTab("Sign out", signOutPanel);
+        
 		final Main self = this;
 		signOutBtn.addActionListener(new ActionListener() {
 			
@@ -40,9 +64,11 @@ public class Main extends JFrame{
 				loginWindow.init();
 				loginWindow.setVisible(true);
 				self.setVisible(false);
+				tabbedPanel.setSelectedIndex(0);
 			}	
 		});
 	}
 
+	
 
 }

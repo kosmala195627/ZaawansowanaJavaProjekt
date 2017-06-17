@@ -1,12 +1,12 @@
 package GUI;
 
-import JavaProject2017.Java2017.MongoUtils;
-import JavaProject2017.Java2017.User;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import Database.Models.User;
+import Database.Services.LoginService;
 
 import javax.swing.*;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,27 +16,25 @@ public class LoginEvents implements ActionListener {
     
     Main mainWindow;
     Login loginWindow;
-    
-    MongoUtils mongo = new MongoUtils();
-    
+    LoginService loginService;
+        
     public LoginEvents(Main mainWindow, Login loginWindow) {
         this.mainWindow = mainWindow;
         this.loginWindow = loginWindow;
+        this.loginService = new LoginService();
     }
     
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == this.loginWindow.getLoginBtn()) {
+            		
+            String userLogin = this.loginWindow.getLoginField().getText();            
+            User user = loginService.getUserByLogin(userLogin);
             
-            DB database = mongo.connectToDatabase();
-            DBCollection users = mongo.getCollectionFromDatabase(database, "users");
-            DBObject userToLogin = mongo.findUserByLogin(users, this.loginWindow.getLoginField().getText());
-            System.out.println(this.loginWindow.getLoginField().getText());
-            System.out.println(users);
-            
-            if (userToLogin==null) {
-                JOptionPane.showMessageDialog(new Frame(), "No such user in the system, Please create account");
+            if (user == null) {
+                JOptionPane.showMessageDialog(new Frame(), "No such user in the system, please create account");
             } else {
-                if ((mongo.findUserByLoginAndPassword(users,this.loginWindow.getLoginField().getText(),this.loginWindow.getPasswordField().getText()))!=null) {
+            	if (BCrypt.checkpw(new String(this.loginWindow.getPasswordField().getPassword()),user.getPassword())) 
+                    {
                     this.mainWindow.setVisible(true);
                     this.loginWindow.setVisible(false);
                     

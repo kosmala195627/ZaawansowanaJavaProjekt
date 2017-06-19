@@ -31,7 +31,7 @@ public class LoginService {
 	*/
 	
     public User getUserByLogin(String login){
-    	
+    	if(login !=null && !login.isEmpty())
 		for(User x : Collections.usersList)	{
 			if(x.getLogin().equals(login)) return x;			
 		}  	

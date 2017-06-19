@@ -1,0 +1,52 @@
+package Database.Services;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+
+import Database.Collections;
+import Database.Models.User;
+
+public class RegistrationService {
+
+    public RegistrationService() {
+
+    }
+
+    /*
+    public DBObject findUserByLogin(DBCollection collection , String login){
+        BasicDBObject query = new BasicDBObject();
+        query.put("login" , login);
+        return collection.findOne(query);
+        
+    }
+    
+    public DBCursor findUserByLoginAndPassword(DBCollection collection , String loginToCheck, String passwordToCheck) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("login" , loginToCheck);
+        query.put("password" , passwordToCheck);
+        return collection.find(query);           
+    }
+     */
+
+    public User getUserById(String id) {
+        int intValue = Integer.parseInt(id);
+        for (User x : Collections.usersList) {
+            if (x.getId() == intValue) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkUsersList(String id) {
+        int intValue = Integer.parseInt(id);
+        for (User x : Collections.usersList) {
+            if (x.getId() == intValue) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

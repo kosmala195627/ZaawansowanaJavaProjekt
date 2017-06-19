@@ -47,9 +47,8 @@ public class LoginEvents implements ActionListener {
             
             
         } else if (event.getSource() == this.loginWindow.getSignUpBtn()) {
-            //TODO
-            // implement registration
-            
+
+             new Registration();
             //Below example of generating hashed password
             //String hashed = BCrypt.hashpw("pass", BCrypt.gensalt());
             //System.out.println(hashed);

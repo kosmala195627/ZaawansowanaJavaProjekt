@@ -1,1 +1,1 @@
-{"_id":{"$oid":"5940344a085a24a1d0a61291"},"taskId":1.0,"name":"Pierwszy Task","startDate":"2017-03-05","endDate":"2017-06-21","projectId":1.0,"managerId":195690.0,"status":"false"}
+{"_id":{"$oid":"5940344a085a24a1d0a61291"},"name":"Pierwszy Task","startDate":"2017-03-05","endDate":"2017-06-21","projectId":"59402ae3a2785ddfa4a6685d","managerId":"593a6de1243f7fea11a98fc4","status":"false"}

@@ -35,6 +35,7 @@ public class LoginEvents implements ActionListener {
             } else {
             	if (BCrypt.checkpw(new String(this.loginWindow.getPasswordField().getPassword()),user.getPassword())) 
                     {
+            		this.mainWindow.refresh();
                     this.mainWindow.setVisible(true);
                     this.loginWindow.setVisible(false);
                     
@@ -47,9 +48,8 @@ public class LoginEvents implements ActionListener {
             
             
         } else if (event.getSource() == this.loginWindow.getSignUpBtn()) {
-            //TODO
-            // implement registration
-            
+
+             new Registration();
             //Below example of generating hashed password
             //String hashed = BCrypt.hashpw("pass", BCrypt.gensalt());
             //System.out.println(hashed);

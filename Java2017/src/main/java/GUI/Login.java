@@ -14,7 +14,6 @@ public class Login extends JFrame{
 	
 	private JTextField loginField;
 	
-	
 	private JLabel loginFieldLbl;
 	private JLabel passwordFieldLbl;
 	private JLabel badAuthLbl;
@@ -32,14 +31,8 @@ public class Login extends JFrame{
 		setMinimumSize(new Dimension(480,320));
 		setTitle("JAVA 2017 - Project - Login page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setLocationRelativeTo(null);
 		c.setLayout(null);
-		
-		//TODO 
-		// to remove
-		JLabel noteLbl = new JLabel("Podpowiedź, login: user, password: pass ");
-		noteLbl.setBounds(20, 20, 340, 30);
-		c.add(noteLbl);		
-		//
 		
 		loginFieldLbl = new JLabel("Login:");
 		loginFieldLbl.setBounds(120, 60, 240, 30);

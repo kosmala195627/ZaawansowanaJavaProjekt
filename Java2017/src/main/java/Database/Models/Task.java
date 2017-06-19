@@ -5,18 +5,21 @@ import java.util.Date;
 
 public class Task {
     private String _id;
-    private int taskId;
     private String name;
     private Date startDate;
     private Date endDate = null;
-    private int projectId;
-    private int managerId;
+    private String projectId;
+    private String managerId;
     private boolean status = false;
     
     public Task () {}
     
-    public Task(int taskId, String name, Date startDate, Date endDate, int projectId, int managerId, boolean status) {
-        
+    public Task(String name, Date startDate, Date endDate, String projectId, String managerId) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectId = projectId;
+        this.managerId = managerId;
     }
     
     public String get_id () {
@@ -25,14 +28,6 @@ public class Task {
     
     public void set_id (String _id) {
         this._id = _id;
-    }
-    
-    public int getTaskId () {
-        return taskId;
-    }
-    
-    public void setTaskId (int taskId) {
-        this.taskId = taskId;
     }
     
     public String getName () {
@@ -59,19 +54,19 @@ public class Task {
         this.endDate = endDate;
     }
     
-    public int getProjectId () {
+    public String getProjectId () {
         return projectId;
     }
     
-    public void setProjectId (int projectId) {
+    public void setProjectId (String projectId) {
         this.projectId = projectId;
     }
     
-    public int getManagerId () {
+    public String getManagerId () {
         return managerId;
     }
     
-    public void setManagerId (int managerId) {
+    public void setManagerId (String managerId) {
         this.managerId = managerId;
     }
     
@@ -85,6 +80,6 @@ public class Task {
     
     @Override
     public String toString() {
-        return "Task { _id: "+ _id + ", taskId: " + taskId + ", name: " + name + ", startDate: " + startDate + ", endDate: " + endDate + ", projectId: " + projectId + ", managerId: " + managerId + ", status: " + status +" }";
+        return "Task { _id: "+ _id + ", name: " + name + ", startDate: " + startDate + ", endDate: " + endDate + ", projectId: " + projectId + ", managerId: " + managerId + ", status: " + status +" }";
     }
 }

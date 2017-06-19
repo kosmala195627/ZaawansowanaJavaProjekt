@@ -3,7 +3,6 @@ package Database.Models;
 
 public class User {
     private String _id;
-    private int id;
     private String firstName;
     private String lastName;
     private String login;
@@ -11,8 +10,7 @@ public class User {
     
     public User () {}
     
-    public User (int id, String firstName, String lastName, String login, String password) {
-        this.id = id;
+    public User (String firstName, String lastName, String login, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
@@ -25,14 +23,6 @@ public class User {
     
     public void set_id (String _id) {
         this._id = _id;
-    }
-    
-    public int getId () {
-        return id;
-    }
-    
-    public void setId (int id) {
-        this.id = id;
     }
     
     public String getFirstName () {
@@ -69,6 +59,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User { _id: "+ _id + ", id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", login: " + login + ", password: " + password + " }";
+        return "User { _id: "+ _id + ", firstName: " + firstName + ", lastName: " + lastName + ", login: " + login + ", password: " + password + " }";
     }
 }

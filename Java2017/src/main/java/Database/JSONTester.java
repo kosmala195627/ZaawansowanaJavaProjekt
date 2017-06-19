@@ -27,7 +27,7 @@ public class JSONTester {
       ObjectMapper mapper = new ObjectMapper();
       jsonString = jsonString.replace(" { \"$oid\" : "," ");
       jsonString = jsonString.replace("} ,"," ,");
-      User student = mapper.readValue(jsonString, User.class);;
+      User student = mapper.readValue(jsonString, User.class);
       System.out.println(student.toString());
       Collections.usersList.add(student);
       return student;

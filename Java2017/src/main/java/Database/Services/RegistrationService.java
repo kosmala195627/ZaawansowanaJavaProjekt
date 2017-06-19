@@ -8,13 +8,13 @@ import com.mongodb.DBObject;
 import Database.Collections;
 import Database.Models.User;
 
-public class LoginService {
+public class RegistrationService {
 
-	public LoginService()
-	{
-		
-	}
-	/*
+    public RegistrationService() {
+
+    }
+
+    /*
     public DBObject findUserByLogin(DBCollection collection , String login){
         BasicDBObject query = new BasicDBObject();
         query.put("login" , login);
@@ -28,13 +28,14 @@ public class LoginService {
         query.put("password" , passwordToCheck);
         return collection.find(query);           
     }
-	*/
-	
-    public User getUserByLogin(String login){
-    	if(login !=null && !login.isEmpty())
-		for(User x : Collections.usersList)	{
-			if(x.getLogin().equals(login)) return x;			
-		}  	
-       return null; 
+     */
+
+    public boolean checkUsersList(String login) {
+        for (User x : Collections.usersList) {
+            if (x.getLogin().equals(login)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

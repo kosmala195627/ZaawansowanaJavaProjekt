@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import Database.Models.User;
+import Database.Services.ProjectService;
 import Database.Services.UsersService;
 
 public class StartPanel extends JPanel implements ActionListener{
@@ -29,12 +30,13 @@ public class StartPanel extends JPanel implements ActionListener{
 	private JButton addBtn;
 	private JButton removeBtn;
 	
-	private UsersService log = new UsersService();
+	private UsersService usersService = new UsersService();
+	private ProjectService projectService = new ProjectService();
 	private User[] users;
 	
 	public StartPanel()
 	{
-		this.users = log.getAllUsers();
+		this.users = usersService.getAllUsers();
 		
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
  
@@ -82,7 +84,7 @@ public class StartPanel extends JPanel implements ActionListener{
         leaderCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         projectLeaderPanel.add(leaderCmbBox);
         
-        String[] data = log.getAllUsers(users);
+        String[] data = usersService.getAllUsers(users);
         for(String s : data) leaderCmbBox.addItem(s);
         this.leaderCmbBox.setSelectedIndex(-1);
         
@@ -144,12 +146,12 @@ public class StartPanel extends JPanel implements ActionListener{
 	
 	private void refresh()
 	{
-		this.users = log.getAllUsers();
+		this.users = usersService.getAllUsers();
 		
 		this.nameField.setText("");
 		
 		leaderCmbBox.removeAllItems();
-        String[] data = log.getAllUsers(users);
+        String[] data = usersService.getAllUsers(users);
         for(String s : data) leaderCmbBox.addItem(s);
 		this.leaderCmbBox.setSelectedIndex(-1);
 		
@@ -162,6 +164,8 @@ public class StartPanel extends JPanel implements ActionListener{
 
 		if(e.getSource() == this.addNewProjectBtn)
 		{
+			User u = this.users[this.leaderCmbBox.getSelectedIndex()];
+			projectService.addNewProject(this.nameField.getText(),u.get_id());
 			refresh();
 		}
 		

@@ -33,19 +33,15 @@ public class RegistrationEvents implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == this.registrationWindow.getAcceptBtn()) {
             if (registrationWindow.getFirstNameField().getText().isEmpty() == false && registrationWindow.getLastNameField().getText().isEmpty() == false
-                    && registrationWindow.getIdField().getText().isEmpty() == false && registrationWindow.getLoginField().getText().isEmpty() == false
-                    && registrationWindow.getPasswordField().getText().isEmpty() == false) {
+                    && registrationWindow.getLoginField().getText().isEmpty() == false && registrationWindow.getPasswordField().getText().isEmpty() == false) {
                 
-                String userId = this.registrationWindow.getIdField().getText();
-                boolean isUserExists = registrationService.checkUsersList(userId);
-
+                boolean isUserExists = registrationService.checkUsersList(registrationWindow.getLoginField().getText());
                 if (isUserExists) {
                     JOptionPane.showMessageDialog(new Frame(), "User with given Id already exists!");
                 } else {
                     User user = new User();
                     user.setFirstName(registrationWindow.getFirstNameField().getText());
                     user.setLastName(registrationWindow.getLastNameField().getText());
-                    user.setId(Integer.parseInt(registrationWindow.getIdField().getText()));
                     user.setLogin(registrationWindow.getLoginField().getText());
                     user.setPassword(BCrypt.hashpw(registrationWindow.getPasswordField().getText(), BCrypt.gensalt()));
 

@@ -30,20 +30,9 @@ public class RegistrationService {
     }
      */
 
-    public User getUserById(String id) {
-        int intValue = Integer.parseInt(id);
+    public boolean checkUsersList(String login) {
         for (User x : Collections.usersList) {
-            if (x.getId() == intValue) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    public boolean checkUsersList(String id) {
-        int intValue = Integer.parseInt(id);
-        for (User x : Collections.usersList) {
-            if (x.getId() == intValue) {
+            if (x.getLogin().equals(login)) {
                 return true;
             }
         }

@@ -3,14 +3,12 @@ package Database.Models;
 
 public class Project {
     private String _id;
-    private int projectId;
     private String name;
-    private int leaderId;
+    private String leaderId;
     
     public Project () {}
     
-    public Project(int projectId, String name, int leaderId) {
-        this.projectId = projectId;
+    public Project(String name, String leaderId) {
         this.name = name;
         this.leaderId = leaderId;
     }
@@ -23,14 +21,6 @@ public class Project {
         this._id = _id;
     }
     
-    public int getProjectId () {
-        return projectId;
-    }
-    
-    public void setProjectId (int projectId) {
-        this.projectId = projectId;
-    }
-    
     public String getName () {
         return name;
     }
@@ -39,16 +29,16 @@ public class Project {
         this.name = name;
     }
     
-    public int getLeaderId () {
+    public String getLeaderId () {
         return leaderId;
     }
     
-    public void setLeaderId (int leaderId) {
+    public void setLeaderId (String leaderId) {
         this.leaderId = leaderId;
     }
     
     @Override
     public String toString() {
-        return "Project { _id: "+ _id + ", id: " + projectId + ", name: " + name + ", leaderId: " + leaderId + " }";
+        return "Project { _id: "+ _id + ", name: " + name + ", leaderId: " + leaderId + " }";
     }
 }

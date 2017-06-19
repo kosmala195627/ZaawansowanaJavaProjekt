@@ -86,7 +86,6 @@ public class MongoConnection {
     public void insertUser(User user) throws IOException {
         Collections.usersList.clear();
         BasicDBObject document = new BasicDBObject();
-        document.put("id", user.getId());
         document.put("firstName", user.getFirstName());
         document.put("lastName", user.getLastName());
         document.put("login", user.getLogin());
@@ -98,7 +97,6 @@ public class MongoConnection {
     public void insertProject(Project project) throws IOException {
         Collections.projectsList.clear();
         BasicDBObject document = new BasicDBObject();
-        document.put("projectId", project.getProjectId());
         document.put("name", project.getName());
         document.put("leaderId", project.getLeaderId());
         projectsCollection.insert(document);
@@ -108,7 +106,6 @@ public class MongoConnection {
     public void insertTask(Task task) throws IOException {
         Collections.tasksList.clear();
         BasicDBObject document = new BasicDBObject();
-        document.put("taskId", task.getTaskId());
         document.put("name", task.getName());
         document.put("startDate", task.getStartDate());
         document.put("endDate", task.getEndDate());
@@ -170,26 +167,26 @@ public class MongoConnection {
     /**
      * * ** Remove from DB***
      */
-    public <T> void removeFromDB(Class<T> obj, int idValue) throws IOException {
+    public <T> void removeFromDB(Class<T> obj, String Value) throws IOException {
         BasicDBObject document = new BasicDBObject();
         if (obj.isAssignableFrom(User.class)) {
             Collections.usersList.clear();
-            document.put("id", idValue);
+            document.put("id", Value);
             usersCollection.remove(document);
             readUsers();
         } else if (obj.isAssignableFrom(Project.class)) {
             Collections.projectsList.clear();
-            document.put("projectId", idValue);
+            document.put("projectId", Value);
             projectsCollection.remove(document);
             readProjects();
         } else if (obj.isAssignableFrom(Task.class)) {
             Collections.tasksList.clear();
-            document.put("taskId", idValue);
+            document.put("taskId", Value);
             tasksCollection.remove(document);
             readTasks();
         } else if (obj.isAssignableFrom(TaskUser.class)) {
             Collections.tasksUsersList.clear();
-            document.put("userId", idValue);
+            document.put("userId", Value);
             tasksUsersCollection.remove(document);
             readTasksUsers();
         }

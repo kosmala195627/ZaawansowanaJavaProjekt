@@ -9,9 +9,9 @@ import javax.swing.JTextField;
 public class Registration extends JFrame {
 
     private final JButton btnAccept, btnCancel;
-    private final JLabel lblInform, lblFirstName, lblLastName, lblId, lblLogin, lblPassword;
+    private final JLabel lblInform, lblFirstName, lblLastName, lblLogin, lblPassword;
     private final JPasswordField txtPassword;
-    private final JTextField txtFirstName, txtLastName, txtId, txtLogin;
+    private final JTextField txtFirstName, txtLastName, txtLogin;
 
     public Registration() {
         this.setTitle("Registration Panel");
@@ -33,10 +33,6 @@ public class Registration extends JFrame {
         lblLastName.setBounds(25, 100, 100, 30);
         add(lblLastName);
 
-        lblId = new JLabel("Id number: ");
-        lblId.setBounds(25, 150, 100, 30);
-        add(lblId);
-
         lblLogin = new JLabel("Login: ");
         lblLogin.setBounds(25, 200, 100, 30);
         add(lblLogin);
@@ -52,10 +48,6 @@ public class Registration extends JFrame {
         txtLastName = new JTextField();
         txtLastName.setBounds(120, 100, 150, 30);
         add(txtLastName);
-
-        txtId = new JTextField();
-        txtId.setBounds(120, 150, 150, 30);
-        add(txtId);
 
         txtLogin = new JTextField();
         txtLogin.setBounds(120, 200, 150, 30);
@@ -80,16 +72,7 @@ public class Registration extends JFrame {
         setVisible(true);
 
     }
-    /*
-    public void init()
-	{
-		this.txtFirstName.setText("");
-		this.txtLastName.setText("");
-                this.txtId.setText("");
-		this.txtLogin.setText("");
-                this.txtPassword.setText("");
-	}*/
-    
+
     public JButton getAcceptBtn() {
 		return btnAccept;
 	}
@@ -104,10 +87,6 @@ public class Registration extends JFrame {
         
         public JTextField getLastNameField() {
 		return txtLastName;
-	}
-        
-        public JTextField getIdField() {
-		return txtId;
 	}
         
 	public JTextField getLoginField() {

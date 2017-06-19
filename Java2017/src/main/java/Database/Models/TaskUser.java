@@ -2,12 +2,12 @@ package Database.Models;
 
 public class TaskUser {
     private String _id;
-    private int userId;
-    private int taskId;
+    private String userId;
+    private String taskId;
     
     public TaskUser () {}
     
-    public TaskUser (int userId, int taskId) {
+    public TaskUser (String userId, String taskId) {
         this.userId = userId;
         this.taskId = taskId;
     }
@@ -20,19 +20,19 @@ public class TaskUser {
         this._id = _id;
     }
     
-    public int getUserId () {
+    public String getUserId () {
         return userId;
     }
     
-    public void setuUserId (int userId) {
+    public void setuUserId (String userId) {
         this.userId = userId;
     }
     
-    public int getTaskId () {
+    public String getTaskId () {
         return taskId;
     }
     
-    public void setTaskId (int taskId) {
+    public void setTaskId (String taskId) {
         this.taskId = taskId;
     }
     

@@ -3,6 +3,7 @@ package GUI.Panels;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -15,12 +16,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import Database.Models.User;
+import Database.Services.UsersService;
+
 public class StartPanel extends JPanel implements ActionListener{
 
 	private JButton addNewProjectBtn;
 	
+	private JTextField nameField;
+	private JComboBox leaderCmbBox;
+	private JList participantsList;
+	private JButton addBtn;
+	private JButton removeBtn;
+	
+	private UsersService log = new UsersService();
+	private User[] users;
+	
 	public StartPanel()
 	{
+		this.users = log.getAllUsers();
+		
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
  
    //// label at begin
@@ -46,7 +61,7 @@ public class StartPanel extends JPanel implements ActionListener{
         nameLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         projectNamePanel.add(nameLbl);
         
-        JTextField nameField = new JTextField(100);
+        nameField = new JTextField(100);
         nameField.setMaximumSize(new Dimension(350,25));
         projectNamePanel.add(nameField);
         
@@ -62,9 +77,15 @@ public class StartPanel extends JPanel implements ActionListener{
 		leaderLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         projectLeaderPanel.add(leaderLbl);
         
-        JTextField leaderField = new JTextField(100);
-        leaderField.setMaximumSize(new Dimension(350,25));
-        projectLeaderPanel.add(leaderField);
+        leaderCmbBox = new JComboBox();
+        leaderCmbBox.setMaximumSize(new Dimension(350,25));
+        leaderCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+        projectLeaderPanel.add(leaderCmbBox);
+        
+        String[] data = log.getAllUsers(users);
+        for(String s : data) leaderCmbBox.addItem(s);
+        this.leaderCmbBox.setSelectedIndex(-1);
+        
         
    //// project participants
         
@@ -78,8 +99,8 @@ public class StartPanel extends JPanel implements ActionListener{
 		participantsLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
 		projectParticipantsPanel.add(participantsLbl);
         
-        String[] data = {"aaaa", "bbbb","cccc","ddd"};
-        JList participantsList = new JList(data); //data has type Object[]
+		String[] participantsData = {};      
+        participantsList = new JList(participantsData); //data has type Object[]
         participantsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         participantsList.setLayoutOrientation(JList.VERTICAL);
         participantsList.setVisibleRowCount(-1);
@@ -96,15 +117,17 @@ public class StartPanel extends JPanel implements ActionListener{
         removeOrAddParticipants.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         this.add(removeOrAddParticipants);
       
-        JButton removeBtn = new JButton("Remove participant");
+        removeBtn = new JButton("Remove participant");
         removeOrAddParticipants.add(removeBtn);
+        removeBtn.addActionListener(this);
         
 		JLabel emptyLbl = new JLabel(" ");
 		emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
 		removeOrAddParticipants.add(emptyLbl);
         
-        JButton addBtn = new JButton("   Add participant   ");
+        addBtn = new JButton("   Add participant   ");
         removeOrAddParticipants.add(addBtn);
+        addBtn.addActionListener(this);
         
    //// select or create project
         
@@ -115,14 +138,41 @@ public class StartPanel extends JPanel implements ActionListener{
         
         addNewProjectBtn = new JButton("Add new project");
         CreatePanel.add(addNewProjectBtn);
+        addNewProjectBtn.addActionListener(this);
+		
+	}
+	
+	private void refresh()
+	{
+		this.users = log.getAllUsers();
+		
+		this.nameField.setText("");
+		
+		leaderCmbBox.removeAllItems();
+        String[] data = log.getAllUsers(users);
+        for(String s : data) leaderCmbBox.addItem(s);
+		this.leaderCmbBox.setSelectedIndex(-1);
+		
+		String[] data2 = {};
+		this.participantsList.setListData(data2);
 		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if(e.getSource() == this.addNewProjectBtn)
 		{
-			
+			refresh();
+		}
+		
+		if(e.getSource() == this.addBtn)
+		{
+			refresh();
+		}
+		
+		if(e.getSource() == this.removeBtn)
+		{
+			refresh();
 		}
 		
 	}

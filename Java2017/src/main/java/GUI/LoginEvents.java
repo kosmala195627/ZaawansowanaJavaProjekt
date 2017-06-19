@@ -35,6 +35,7 @@ public class LoginEvents implements ActionListener {
             } else {
             	if (BCrypt.checkpw(new String(this.loginWindow.getPasswordField().getPassword()),user.getPassword())) 
                     {
+            		this.mainWindow.refresh();
                     this.mainWindow.setVisible(true);
                     this.loginWindow.setVisible(false);
                     

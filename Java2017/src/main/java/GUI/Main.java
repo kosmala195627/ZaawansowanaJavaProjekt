@@ -24,6 +24,8 @@ public class Main extends JFrame {
 
     private JButton signOutBtn;
     private Login loginWindow;
+    
+    final JTabbedPane tabbedPanel;
 
     public Main() {
         loginWindow = new Login(this);
@@ -34,7 +36,7 @@ public class Main extends JFrame {
         setTitle("JAVA 2017 - Project");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        final JTabbedPane tabbedPanel = new JTabbedPane();
+        tabbedPanel = new JTabbedPane();
         getContentPane().add(tabbedPanel);
         StartPanel start = new StartPanel();
         tabbedPanel.addTab("Start", start);
@@ -64,6 +66,21 @@ public class Main extends JFrame {
                 tabbedPanel.setSelectedIndex(0);
             }
         });
+    }
+    
+    public void refresh()
+    {	
+    	tabbedPanel.removeAll();
+    	
+        StartPanel start = new StartPanel();
+        tabbedPanel.addTab("Start", start);
+        ProjectsPanel projects = new ProjectsPanel();
+        tabbedPanel.addTab("Projects", projects);
+        TasksPanel tasks = new TasksPanel();
+        tabbedPanel.addTab("Tasks", tasks);
+        UsersPanel users = new UsersPanel();
+        tabbedPanel.addTab("Users", users);
+    	
     }
 
 }

@@ -1,6 +1,8 @@
 package GUI.Panels;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,8 +15,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-public class StartPanel extends JPanel{
+public class StartPanel extends JPanel implements ActionListener{
 
+	private JButton addNewProjectBtn;
+	
 	public StartPanel()
 	{
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -109,8 +113,17 @@ public class StartPanel extends JPanel{
         CreatePanel.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 0));
         this.add(CreatePanel);
         
-        JButton addNewProjectBtn = new JButton("Add new project");
+        addNewProjectBtn = new JButton("Add new project");
         CreatePanel.add(addNewProjectBtn);
+		
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == this.addNewProjectBtn)
+		{
+			
+		}
 		
 	}
 }

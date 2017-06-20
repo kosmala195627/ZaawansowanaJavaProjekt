@@ -1,9 +1,7 @@
 package GUI;
 
-import Database.Collections;
 import Database.Models.User;
 import Database.MongoConnection;
-import Database.Services.LoginService;
 import Database.Services.RegistrationService;
 
 import javax.swing.*;
@@ -34,7 +32,7 @@ public class RegistrationEvents implements ActionListener {
         if (event.getSource() == this.registrationWindow.getAcceptBtn()) {
             if (registrationWindow.getFirstNameField().getText().isEmpty() == false && registrationWindow.getLastNameField().getText().isEmpty() == false
                     && registrationWindow.getLoginField().getText().isEmpty() == false && registrationWindow.getPasswordField().getText().isEmpty() == false) {
-                
+
                 boolean isUserExists = registrationService.checkUsersList(registrationWindow.getLoginField().getText());
                 if (isUserExists) {
                     JOptionPane.showMessageDialog(new Frame(), "User with given Login already exists!");

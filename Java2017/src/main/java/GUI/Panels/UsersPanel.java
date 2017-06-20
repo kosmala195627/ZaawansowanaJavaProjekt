@@ -18,12 +18,7 @@ import javax.swing.event.ListSelectionListener;
 
 import Database.Collections;
 import Database.Models.User;
-import Database.MongoConnection;
 import GUI.TableOfUsers;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.codehaus.jackson.map.JsonMappingException;
 
 public class UsersPanel extends JPanel implements ActionListener {
 

@@ -15,7 +15,6 @@ import Database.Models.User;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Date;
 import org.codehaus.jackson.map.JsonMappingException;
 
 public class MongoConnection {

@@ -1,6 +1,9 @@
 package Database;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -24,9 +27,11 @@ public class JSONTester {
    }
 
    public User readUsersJSON(String jsonString) throws JsonParseException, JsonMappingException, IOException{
-      ObjectMapper mapper = new ObjectMapper();
+	   ObjectMapper mapper = new ObjectMapper();
       jsonString = jsonString.replace(" { \"$oid\" : "," ");
       jsonString = jsonString.replace("} ,"," ,");
+      jsonString = jsonString.replace("{\"$oid\":"," ");
+      jsonString = jsonString.replace("},"," ,");
       User student = mapper.readValue(jsonString, User.class);
       System.out.println(student.toString());
       Collections.usersList.add(student);
@@ -37,6 +42,8 @@ public class JSONTester {
       ObjectMapper mapper = new ObjectMapper();
       jsonString = jsonString.replace(" { \"$oid\" : "," ");
       jsonString = jsonString.replace("} ,"," ,");
+      jsonString = jsonString.replace("{\"$oid\":"," ");
+      jsonString = jsonString.replace("},"," ,");
       Project project = mapper.readValue(jsonString, Project.class);
       System.out.println(project.toString());
       Collections.projectsList.add(project);
@@ -47,7 +54,15 @@ public class JSONTester {
       ObjectMapper mapper = new ObjectMapper();
       jsonString = jsonString.replace(" { \"$oid\" : "," ");
       jsonString = jsonString.replace("} ,"," ,");
+      jsonString = jsonString.replace("{\"$oid\":"," ");
+      jsonString = jsonString.replace("},"," ,");
       Task task = mapper.readValue(jsonString, Task.class);
+      Date startDate = new Date(task.getStartDate().getTime());
+      Date endDate = new Date(task.getEndDate().getTime());
+      startDate.setHours(0);
+      endDate.setHours(0);
+      task.setStartDate(startDate);
+      task.setEndDate(endDate);
       System.out.println(task.toString());
       Collections.tasksList.add(task);
       return task;
@@ -57,6 +72,8 @@ public class JSONTester {
       ObjectMapper mapper = new ObjectMapper();
       jsonString = jsonString.replace(" { \"$oid\" : "," ");
       jsonString = jsonString.replace("} ,"," ,");
+      jsonString = jsonString.replace("{\"$oid\":"," ");
+      jsonString = jsonString.replace("},"," ,");
       TaskUser taskUser = mapper.readValue(jsonString, TaskUser.class);
       System.out.println(taskUser.toString());
       Collections.tasksUsersList.add(taskUser);

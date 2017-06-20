@@ -10,17 +10,19 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Database.Collections;
 import GUI.Panels.ProjectsPanel;
 import GUI.Panels.StartPanel;
 import GUI.Panels.TasksPanel;
 import GUI.Panels.UsersPanel;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener {
 
     private JButton signOutBtn;
     private Login loginWindow;
@@ -45,7 +47,7 @@ public class Main extends JFrame {
         TasksPanel tasks = new TasksPanel();
         tabbedPanel.addTab("Tasks", tasks);
         UsersPanel users = new UsersPanel();
-        tabbedPanel.addTab("Users", users);
+        tabbedPanel.addTab("Team members", users);
 
         // to allow signOut
         signOutBtn = new JButton("Sign out");
@@ -56,16 +58,7 @@ public class Main extends JFrame {
         signOutPanel.add(signOutBtn);
         tabbedPanel.addTab("Sign out", signOutPanel);
 
-        final Main self = this;
-        signOutBtn.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent event) {
-                loginWindow.init();
-                loginWindow.setVisible(true);
-                self.setVisible(false);
-                tabbedPanel.setSelectedIndex(0);
-            }
-        });
+        signOutBtn.addActionListener(this);
     }
     
     public void refresh()
@@ -79,8 +72,30 @@ public class Main extends JFrame {
         TasksPanel tasks = new TasksPanel();
         tabbedPanel.addTab("Tasks", tasks);
         UsersPanel users = new UsersPanel();
-        tabbedPanel.addTab("Users", users);
+        tabbedPanel.addTab("Team members", users);
+        
+        // to allow signOut
+        signOutBtn = new JButton("Sign out");
+
+        final JPanel signOutPanel = new JPanel();
+        JLabel signOutLabel = new JLabel("Please confirm.    ");
+        signOutPanel.add(signOutLabel);
+        signOutPanel.add(signOutBtn);
+        tabbedPanel.addTab("Sign out", signOutPanel);
+
+        signOutBtn.addActionListener(this);
     	
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == signOutBtn) {
+            loginWindow.init();
+            loginWindow.setVisible(true);
+            this.setVisible(false);
+            tabbedPanel.setSelectedIndex(0);
+        }
+
     }
 
 }

@@ -37,7 +37,7 @@ public class RegistrationEvents implements ActionListener {
                 
                 boolean isUserExists = registrationService.checkUsersList(registrationWindow.getLoginField().getText());
                 if (isUserExists) {
-                    JOptionPane.showMessageDialog(new Frame(), "User with given Id already exists!");
+                    JOptionPane.showMessageDialog(new Frame(), "User with given Login already exists!");
                 } else {
                     User user = new User();
                     user.setFirstName(registrationWindow.getFirstNameField().getText());

@@ -1,9 +1,7 @@
 package GUI;
 
-import Database.Collections;
 import Database.Models.User;
 import Database.MongoConnection;
-import Database.Services.LoginService;
 import Database.Services.RegistrationService;
 
 import javax.swing.*;
@@ -20,12 +18,10 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 public class RegistrationEvents implements ActionListener {
 
-    //Login loginWindow;
     Registration registrationWindow;
     RegistrationService registrationService;
 
     public RegistrationEvents(Registration registrationWindow) {
-        //this.loginWindow = loginWindow;
         this.registrationWindow = registrationWindow;
         this.registrationService = new RegistrationService();
     }
@@ -34,10 +30,10 @@ public class RegistrationEvents implements ActionListener {
         if (event.getSource() == this.registrationWindow.getAcceptBtn()) {
             if (registrationWindow.getFirstNameField().getText().isEmpty() == false && registrationWindow.getLastNameField().getText().isEmpty() == false
                     && registrationWindow.getLoginField().getText().isEmpty() == false && registrationWindow.getPasswordField().getText().isEmpty() == false) {
-                
+
                 boolean isUserExists = registrationService.checkUsersList(registrationWindow.getLoginField().getText());
                 if (isUserExists) {
-                    JOptionPane.showMessageDialog(new Frame(), "User with given Id already exists!");
+                    JOptionPane.showMessageDialog(new Frame(), "User with given Login already exists!");
                 } else {
                     User user = new User();
                     user.setFirstName(registrationWindow.getFirstNameField().getText());

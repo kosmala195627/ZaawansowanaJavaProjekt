@@ -1,10 +1,5 @@
 package Database.Services;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-
 import Database.Collections;
 import Database.Models.User;
 
@@ -29,7 +24,6 @@ public class RegistrationService {
         return collection.find(query);           
     }
      */
-
     public boolean checkUsersList(String login) {
         for (User x : Collections.usersList) {
             if (x.getLogin().equals(login)) {

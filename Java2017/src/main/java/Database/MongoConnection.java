@@ -16,7 +16,6 @@ import Database.Models.User;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Date;
 import org.codehaus.jackson.map.JsonMappingException;
 
 public class MongoConnection {
@@ -59,7 +58,6 @@ public class MongoConnection {
         DBCursor cursor2 = projectsCollection.find();
         while (cursor2.hasNext()) {
             DBObject obj = cursor2.next();
-            System.out.println(obj.toString());
             test.readProjectsJSON(obj.toString());
         }
     }
@@ -69,7 +67,6 @@ public class MongoConnection {
         DBCursor cursor3 = tasksCollection.find();
         while (cursor3.hasNext()) {
             DBObject obj = cursor3.next();
-            System.out.println(obj.toString());
             test.readTasksJSON(obj.toString());
         }
     }
@@ -79,7 +76,6 @@ public class MongoConnection {
         DBCursor cursor3 = tasksUsersCollection.find();
         while (cursor3.hasNext()) {
             DBObject obj = cursor3.next();
-            System.out.println(obj.toString());
             test.readTasksUsersJSON(obj.toString());
         }
     }
@@ -176,17 +172,17 @@ public class MongoConnection {
         BasicDBObject document = new BasicDBObject();
         if (obj.isAssignableFrom(User.class)) {
             Collections.usersList.clear();
-            document.put("id", Value);
+            document.put("login", Value);
             usersCollection.remove(document);
             readUsers();
         } else if (obj.isAssignableFrom(Project.class)) {
             Collections.projectsList.clear();
-            document.put("projectId", Value);
+            document.put("name", Value);
             projectsCollection.remove(document);
             readProjects();
         } else if (obj.isAssignableFrom(Task.class)) {
             Collections.tasksList.clear();
-            document.put("taskId", Value);
+            document.put("name", Value);
             tasksCollection.remove(document);
             readTasks();
         } else if (obj.isAssignableFrom(TaskUser.class)) {

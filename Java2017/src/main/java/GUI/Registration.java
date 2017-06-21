@@ -19,7 +19,6 @@ public class Registration extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
-        
 
         lblInform = new JLabel("Please, enter the informations about new User.");
         lblInform.setBounds(60, 10, 300, 30);
@@ -68,32 +67,31 @@ public class Registration extends JFrame {
         RegistrationEvents log = new RegistrationEvents(this);
         btnAccept.addActionListener(log);
         btnCancel.addActionListener(log);
-        
         setVisible(true);
 
     }
 
     public JButton getAcceptBtn() {
-		return btnAccept;
-	}
+        return btnAccept;
+    }
 
-	public JButton getCancelBtn() {
-		return btnCancel;
-	}
+    public JButton getCancelBtn() {
+        return btnCancel;
+    }
 
-        public JTextField getFirstNameField() {
-		return txtFirstName;
-	}
-        
-        public JTextField getLastNameField() {
-		return txtLastName;
-	}
-        
-	public JTextField getLoginField() {
-		return txtLogin;
-	}
+    public JTextField getFirstNameField() {
+        return txtFirstName;
+    }
 
-	public JPasswordField getPasswordField() {
-		return txtPassword;
-	}
+    public JTextField getLastNameField() {
+        return txtLastName;
+    }
+
+    public JTextField getLoginField() {
+        return txtLogin;
+    }
+
+    public JPasswordField getPasswordField() {
+        return txtPassword;
+    }
 }

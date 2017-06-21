@@ -1,20 +1,15 @@
 package GUI;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import Database.Collections;
 import GUI.Panels.ProjectsPanel;
@@ -86,6 +81,7 @@ public class Main extends JFrame implements ActionListener {
         signOutBtn.addActionListener(this);
     	
     }
+
 
     public void actionPerformed(ActionEvent e) {
 

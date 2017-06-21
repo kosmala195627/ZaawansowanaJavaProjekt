@@ -1,20 +1,15 @@
 package Database.Services;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-
 import Database.Collections;
 import Database.Models.User;
 
 public class LoginService {
 
-	public LoginService()
-	{
-		
-	}
-	/*
+    public LoginService() {
+
+    }
+
+    /*
     public DBObject findUserByLogin(DBCollection collection , String login){
         BasicDBObject query = new BasicDBObject();
         query.put("login" , login);
@@ -28,13 +23,15 @@ public class LoginService {
         query.put("password" , passwordToCheck);
         return collection.find(query);           
     }
-	*/
-	
-    public User getUserByLogin(String login){
-    	if(login !=null && !login.isEmpty())
-		for(User x : Collections.usersList)	{
-			if(x.getLogin().equals(login)) return x;			
-		}  	
-       return null; 
+     */
+    public User getUserByLogin(String login) {
+        if (login != null && !login.isEmpty()) {
+            for (User x : Collections.usersList) {
+                if (x.getLogin().equals(login)) {
+                    return x;
+                }
+            }
+        }
+        return null;
     }
 }

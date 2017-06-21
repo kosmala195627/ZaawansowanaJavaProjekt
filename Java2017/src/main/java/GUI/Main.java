@@ -19,7 +19,7 @@ public class Main extends JFrame {
 
     private JButton signOutBtn;
     private Login loginWindow;
-
+    
     final JTabbedPane tabbedPanel;
 
     public Main() {
@@ -62,10 +62,11 @@ public class Main extends JFrame {
             }
         });
     }
-
-    public void refresh() {
-        tabbedPanel.removeAll();
-
+    
+    public void refresh()
+    {	
+    	tabbedPanel.removeAll();
+    	
         StartPanel start = new StartPanel();
         tabbedPanel.addTab("Start", start);
         ProjectsPanel projects = new ProjectsPanel();
@@ -74,7 +75,7 @@ public class Main extends JFrame {
         tabbedPanel.addTab("Tasks", tasks);
         UsersPanel users = new UsersPanel();
         tabbedPanel.addTab("Users", users);
-
+    	
     }
 
 }

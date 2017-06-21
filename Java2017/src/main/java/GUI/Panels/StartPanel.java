@@ -3,6 +3,7 @@ package GUI.Panels;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -18,6 +19,8 @@ import javax.swing.ListSelectionModel;
 import Database.Models.User;
 import Database.Services.ProjectService;
 import Database.Services.UsersService;
+import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 public class StartPanel extends JPanel implements ActionListener {
 
@@ -85,45 +88,6 @@ public class StartPanel extends JPanel implements ActionListener {
         }
         this.leaderCmbBox.setSelectedIndex(-1);
 
-        //// project participants
-        JPanel projectParticipantsPanel = new JPanel();
-        projectParticipantsPanel.setLayout(new BoxLayout(projectParticipantsPanel, BoxLayout.X_AXIS));
-        projectParticipantsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        this.add(projectParticipantsPanel);
-
-        JLabel participantsLbl = new JLabel();
-        participantsLbl.setText("Participants: ");
-        participantsLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-        projectParticipantsPanel.add(participantsLbl);
-
-        String[] participantsData = {};
-        participantsList = new JList(participantsData); //data has type Object[]
-        participantsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        participantsList.setLayoutOrientation(JList.VERTICAL);
-        participantsList.setVisibleRowCount(-1);
-
-        JScrollPane listScroller = new JScrollPane(participantsList);
-        listScroller.setMaximumSize(new Dimension(320, 100));
-        projectParticipantsPanel.add(listScroller);
-
-        //// Add remove project participants
-        JPanel removeOrAddParticipants = new JPanel();
-        removeOrAddParticipants.setLayout(new BoxLayout(removeOrAddParticipants, BoxLayout.X_AXIS));
-        removeOrAddParticipants.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        this.add(removeOrAddParticipants);
-
-        removeBtn = new JButton("Remove participant");
-        removeOrAddParticipants.add(removeBtn);
-        removeBtn.addActionListener(this);
-
-        JLabel emptyLbl = new JLabel(" ");
-        emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
-        removeOrAddParticipants.add(emptyLbl);
-
-        addBtn = new JButton("   Add participant   ");
-        removeOrAddParticipants.add(addBtn);
-        addBtn.addActionListener(this);
-
         //// select or create project
         JPanel CreatePanel = new JPanel();
         CreatePanel.setLayout(new BoxLayout(CreatePanel, BoxLayout.X_AXIS));
@@ -148,26 +112,20 @@ public class StartPanel extends JPanel implements ActionListener {
         }
         this.leaderCmbBox.setSelectedIndex(-1);
 
-        String[] data2 = {};
-        this.participantsList.setListData(data2);
+ //       String[] data2 = {};
+//        this.participantsList.setListData(data2);
 
     }
 
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == this.addNewProjectBtn) {
-            User u = this.users[this.leaderCmbBox.getSelectedIndex()];
-            projectService.addNewProject(this.nameField.getText(), u.get_id());
-            refresh();
+            if (this.nameField.getText().isEmpty() && this.leaderCmbBox.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(new Frame(), "You have to fill Name of Project field and choose the Leader of the new Project");
+            } else {
+                User u = this.users[this.leaderCmbBox.getSelectedIndex()];
+                projectService.addNewProject(this.nameField.getText(), u.get_id());
+                refresh();
+            }
         }
-
-        if (e.getSource() == this.addBtn) {
-            refresh();
-        }
-
-        if (e.getSource() == this.removeBtn) {
-            refresh();
-        }
-
     }
 }

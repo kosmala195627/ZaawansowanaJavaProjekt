@@ -67,7 +67,6 @@ public class Registration extends JFrame {
         RegistrationEvents log = new RegistrationEvents(this);
         btnAccept.addActionListener(log);
         btnCancel.addActionListener(log);
-
         setVisible(true);
 
     }

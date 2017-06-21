@@ -8,6 +8,9 @@ import Database.Services.TasksService;
 import Database.Services.UsersService;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -15,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -24,12 +28,16 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
-public class TasksPanel extends JPanel {
+public class TasksPanel extends JPanel  implements ActionListener {
     
     private UsersService usersService = new UsersService();
     private ProjectService projectService = new ProjectService();
     private Project[] projects;
     private User[] users;
+    
+    JComboBox belongCmbBox, activityCmbBox;
+    JButton backToProjectBtn, createNewBtn, bAdd, bDelete;
+    JTextField managerField, taskNameField;
 
     TasksService taskService = new TasksService();
     private Task[] tasks;
@@ -52,7 +60,7 @@ public class TasksPanel extends JPanel {
         belongsPanel.add(belongLbl);
         belongsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JComboBox belongCmbBox = new JComboBox();
+        belongCmbBox = new JComboBox();
         belongCmbBox.setMaximumSize(new Dimension(400, 25));
         belongCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         belongsPanel.add(belongCmbBox);
@@ -68,8 +76,9 @@ public class TasksPanel extends JPanel {
         space1Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
         belongsPanel.add(space1Lbl);
 
-        JButton backToProjectBtn = new JButton("Back to project");
+        backToProjectBtn = new JButton("Back to project");
         belongsPanel.add(backToProjectBtn);
+        backToProjectBtn.addActionListener(this);
 
         //// project manager  
         JPanel managerPanel = new JPanel();
@@ -83,7 +92,7 @@ public class TasksPanel extends JPanel {
         managerPanel.add(managerLbl);
         managerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JTextField managerField = new JTextField(100);
+        managerField = new JTextField(100);
         managerField.setMaximumSize(new Dimension(380, 25));
         managerPanel.add(managerField);
 
@@ -99,7 +108,7 @@ public class TasksPanel extends JPanel {
         nameAndActivityPanel.add(taskNameLbl);
         nameAndActivityPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JTextField taskNameField = new JTextField(100);
+        taskNameField = new JTextField(100);
         taskNameField.setMaximumSize(new Dimension(300, 25));
         nameAndActivityPanel.add(taskNameField);
 
@@ -108,11 +117,10 @@ public class TasksPanel extends JPanel {
         taskActivityLbl.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 20));
         nameAndActivityPanel.add(taskActivityLbl);
 
-        JComboBox activityCmbBox = new JComboBox();
+        activityCmbBox = new JComboBox();
         activityCmbBox.setMaximumSize(new Dimension(200, 25));
         activityCmbBox.setMinimumSize(new Dimension(200, 25));
-        activityCmbBox.addItem("Not started yet");
-        activityCmbBox.addItem("In progress");
+        activityCmbBox.addItem("Not finised");
         activityCmbBox.addItem("Finished");
         nameAndActivityPanel.add(activityCmbBox);
 
@@ -203,16 +211,18 @@ public class TasksPanel extends JPanel {
         space2Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         membersPanel.add(space2Lbl);
 
-        JButton bAdd = new JButton("Add");
+        bAdd = new JButton("Add");
         membersPanel.add(bAdd);
+        bAdd.addActionListener(this);
 
         JLabel space3Lbl = new JLabel();
         space3Lbl.setText(" ");
         space3Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         membersPanel.add(space3Lbl);
 
-        JButton bDelete = new JButton("Remove");
+        bDelete = new JButton("Remove");
         membersPanel.add(bDelete);
+        bDelete.addActionListener(this);
 
         //// task create
         JPanel createButtonPanel = new JPanel();
@@ -226,9 +236,16 @@ public class TasksPanel extends JPanel {
         space4Lbl.setBorder(BorderFactory.createEmptyBorder(100, 320, 0, 0));
         createButtonPanel.add(space4Lbl);
 
-        JButton createNewBtn = new JButton("Create new task");
+        createNewBtn = new JButton("Create new task");
         createButtonPanel.add(createNewBtn);
+        createNewBtn.addActionListener(this);
 
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == bAdd || e.getSource() == bDelete || e.getSource() == backToProjectBtn || e.getSource() == createNewBtn) {
+            JOptionPane.showMessageDialog(new Frame(), "Sorry! This page is still building :(");
+        }
     }
 
 }

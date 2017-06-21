@@ -22,14 +22,27 @@ import Database.Models.User;
 import Database.Services.ProjectService;
 import Database.Services.UsersService;
 import GUI.TableOfTasks;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
-public class ProjectsPanel extends JPanel {
+public class ProjectsPanel extends JPanel implements ActionListener {
 
     private ProjectService projectService = new ProjectService();
     private Project[] projects;
     private UsersService usersService = new UsersService();
     private User[] users;
+    private String[] dataProjects;
+    String projName;
     User selectedUser;
+
+    JTextField nameField;
+    JComboBox leaderCmbBox, projectsCmbBox;
+    JButton addbtn, updateBtn, deleteBtn, addNewProjectBtn;
+    TableOfTasks model;
+    JScrollPane spPane;
+    JTable tTable;
 
     public ProjectsPanel() {
         this.users = usersService.getAllUsers();
@@ -48,18 +61,42 @@ public class ProjectsPanel extends JPanel {
         label1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         selectOrCreatePanel.add(label1);
 
-        JComboBox projectsCmbBox = new JComboBox();
+        projectsCmbBox = new JComboBox();
         projectsCmbBox.setMaximumSize(new Dimension(250, 25));
         projectsCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         selectOrCreatePanel.add(projectsCmbBox);
+        // projectsCmbBox.addActionListener(this);
 
-        String[] dataProjects = projectService.getAllProjects(projects);
+        dataProjects = projectService.getAllProjects(projects);
         for (String s : dataProjects) {
             projectsCmbBox.addItem(s);
         }
         projectsCmbBox.setSelectedIndex(-1);
+        ActionListener cbActionListener = new ActionListener() {//add actionlistner to listen for change
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                projName = (String) projectsCmbBox.getSelectedItem();//get the selected item
+                System.out.println(projName);
+                model = new TableOfTasks();
+                model.add(projName);
+                final JTable tTable = new JTable();
+                tTable.setModel(model);
+                tTable.setPreferredScrollableViewportSize(new Dimension(600, 200));
+                tTable.setFillsViewportHeight(true);
+                tTable.setCellSelectionEnabled(true);
+                tTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent e) {
+                        selectedUser = Collections.usersList.get(tTable.getSelectedRow());
+                        System.out.println(selectedUser.getLastName());
+                    }
+                });
+                spPane = new JScrollPane(tTable);
+            }
+        };
+        projectsCmbBox.addActionListener(cbActionListener);
 
-        JButton addNewProjectBtn = new JButton("Add new project");
+        addNewProjectBtn = new JButton("Add new project");
         selectOrCreatePanel.add(addNewProjectBtn);
 
         //// project name
@@ -73,7 +110,7 @@ public class ProjectsPanel extends JPanel {
         nameLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 30));
         projectNamePanel.add(nameLbl);
 
-        JTextField nameField = new JTextField(100);
+        nameField = new JTextField(100);
         nameField.setMaximumSize(new Dimension(350, 25));
         projectNamePanel.add(nameField);
 
@@ -88,7 +125,7 @@ public class ProjectsPanel extends JPanel {
         leaderLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 30));
         projectLeaderPanel.add(leaderLbl);
 
-        JComboBox leaderCmbBox = new JComboBox();
+        leaderCmbBox = new JComboBox();
         leaderCmbBox.setMaximumSize(new Dimension(360, 25));
         leaderCmbBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         projectLeaderPanel.add(leaderCmbBox);
@@ -99,48 +136,13 @@ public class ProjectsPanel extends JPanel {
         }
         leaderCmbBox.setSelectedIndex(-1);
 
-        //// project participants
-        JPanel projectParticipantsPanel = new JPanel();
-        projectParticipantsPanel.setLayout(new BoxLayout(projectParticipantsPanel, BoxLayout.X_AXIS));
-        projectParticipantsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        this.add(projectParticipantsPanel);
-
-        JLabel participantsLbl = new JLabel();
-        participantsLbl.setText("Participants: ");
-        participantsLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-        projectParticipantsPanel.add(participantsLbl);
-
-        String[] data = {"aaaa", "bbbb", "cccc", "ddd"};
-        JList participantsList = new JList(data); //data has type Object[]
-        participantsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        participantsList.setLayoutOrientation(JList.VERTICAL);
-        participantsList.setVisibleRowCount(-1);
-
-        JScrollPane listScroller = new JScrollPane(participantsList);
-        listScroller.setMaximumSize(new Dimension(320, 100));
-        projectParticipantsPanel.add(listScroller);
-
-        JLabel empty0Lbl = new JLabel(" ");
-        empty0Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
-        projectParticipantsPanel.add(empty0Lbl);
-
-        JButton removeBtn = new JButton("Remove");
-        projectParticipantsPanel.add(removeBtn);
-
-        JLabel emptyLbl = new JLabel(" ");
-        emptyLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
-        projectParticipantsPanel.add(emptyLbl);
-
-        JButton addBtn = new JButton("   Add   ");
-        projectParticipantsPanel.add(addBtn);
-
         //// Project task list
         JLabel empty2Lbl = new JLabel(" ");
         empty2Lbl.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 20));
         this.add(empty2Lbl);
-
-        TableOfTasks model = new TableOfTasks();
-        model.add();
+        
+        model = new TableOfTasks();
+        model.add(projName);
         final JTable tTable = new JTable();
         tTable.setModel(model);
         tTable.setPreferredScrollableViewportSize(new Dimension(600, 200));
@@ -153,7 +155,7 @@ public class ProjectsPanel extends JPanel {
                 System.out.println(selectedUser.getLastName());
             }
         });
-        JScrollPane spPane = new JScrollPane(tTable);
+        spPane = new JScrollPane(tTable);
         spPane.setMaximumSize(new Dimension(600, 200));
         this.add(spPane);
 
@@ -163,23 +165,57 @@ public class ProjectsPanel extends JPanel {
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         this.add(buttonsPanel);
 
-        JButton addbtn = new JButton("Add task");
+        addbtn = new JButton("Add task");
         buttonsPanel.add(addbtn);
+        addbtn.addActionListener(this);
 
         JLabel space1Lbl = new JLabel();
         space1Lbl.setText(" ");
         space1Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         buttonsPanel.add(space1Lbl);
 
-        JButton updateBtn = new JButton("Update task");
+        updateBtn = new JButton("Update task");
         buttonsPanel.add(updateBtn);
+        updateBtn.addActionListener(this);
 
         JLabel space2Lbl = new JLabel();
         space2Lbl.setText(" ");
         space2Lbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         buttonsPanel.add(space2Lbl);
 
-        JButton deleteBtn = new JButton("Delete task");
+        deleteBtn = new JButton("Delete task");
         buttonsPanel.add(deleteBtn);
+        deleteBtn.addActionListener(this);
     }
+
+    private void refresh() {
+        this.users = usersService.getAllUsers();
+        this.projects = projectService.getAllProjects();
+
+        this.nameField.setText("");
+
+        leaderCmbBox.removeAllItems();
+        String[] data = usersService.getAllUsers(users);
+        for (String s : data) {
+            leaderCmbBox.addItem(s);
+        }
+        this.leaderCmbBox.setSelectedIndex(-1);
+
+        model = new TableOfTasks();
+        model.add(projName);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == this.addNewProjectBtn) {
+            if (this.nameField.getText().isEmpty() && this.leaderCmbBox.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(new Frame(), "You have to fill Name of Project field and choose the Leader of the new Project");
+            } else {
+                User u = this.users[this.leaderCmbBox.getSelectedIndex()];
+                projectService.addNewProject(this.nameField.getText(), u.get_id());
+                refresh();
+            }
+        }
+    }
+
 }

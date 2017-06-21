@@ -18,11 +18,17 @@ import javax.swing.event.ListSelectionListener;
 
 import Database.Collections;
 import Database.Models.User;
+import Database.MongoConnection;
 import GUI.TableOfUsers;
+import GUI.UpdatingUser;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.codehaus.jackson.map.JsonMappingException;
 
 public class UsersPanel extends JPanel implements ActionListener {
 
-    private final JButton bAdd, bDelete;
+    private final JButton bUpdate, bDelete;
     private final TableOfUsers model;
     private JTable tTable;
     private final JScrollPane spPane;
@@ -55,9 +61,9 @@ public class UsersPanel extends JPanel implements ActionListener {
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         this.add(buttonsPanel);
 
-        bAdd = new JButton("Refresh List");
-        buttonsPanel.add(bAdd);
-        bAdd.addActionListener(this);
+        bUpdate = new JButton("Update");
+        buttonsPanel.add(bUpdate);
+        bUpdate.addActionListener(this);
 
         JLabel space1Lbl = new JLabel();
         space1Lbl.setText(" ");
@@ -73,17 +79,23 @@ public class UsersPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object z = e.getSource();
 
-        if (z == bAdd) {
-
+        if (z == bUpdate) {
+            new UpdatingUser(selectedUser);
         }
         if (z == bDelete) {
-
             if (Collections.usersList.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Currently the user list is empty!", "No users", JOptionPane.ERROR_MESSAGE);
             } else {
                 int odp = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?", "Question", JOptionPane.YES_NO_OPTION);
                 if (odp == JOptionPane.YES_OPTION) {
-                    Collections.usersList.remove(selectedUser);
+                    try {
+                        //Collections.usersList.remove(selectedUser);
+                        new MongoConnection().removeFromDB(selectedUser.getClass(), selectedUser.getLogin());
+                    } catch (JsonMappingException ex) {
+                        Logger.getLogger(UsersPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(UsersPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }

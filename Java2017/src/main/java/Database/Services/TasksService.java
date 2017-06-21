@@ -31,6 +31,13 @@ public class TasksService {
         }
         return temp.toArray(result);
     }
+    
+    public String returnTaskStatus(boolean status) {
+        if (status) {
+            return "Finished";
+        }
+        return "Not finished";
+    }
 
     public void addNewTask(String name, Date startDate, Date endDate, String projectId, String managerId) {
         Task task = new Task(name, startDate, endDate, projectId, managerId);

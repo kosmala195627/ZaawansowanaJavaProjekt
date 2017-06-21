@@ -24,4 +24,13 @@ public class UsersService {
         }
         return temp.toArray(result);
     }
+    
+    public String returnUserName(String userId) {
+        for (User x : Collections.usersList) {
+            if (x.get_id().equals(userId)) {
+                return x.getFirstName() + " " + x.getLastName();
+            }
+        }
+        return null;
+    }
 }

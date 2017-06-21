@@ -1,5 +1,21 @@
 # ZaawansowanaJavaProjekt
 
+Instrukcja Obsługi Programu:
+1) Logowanie 
+- dane użytkownika (login i hasło) odczytywane są z BD. Jeżeli podane dane są prawidłowe, możemy przejść dalej.
+- w przeciwnym przypadku program sugeruje nam abyśmy się zarejestrowali. Przechodząc do rejestracji wpisujemy swoje dane. Są one widoczne od razu w bazie.
+2) Po zalogowaniu
+- po pozytywnym przejściu procesu uwierzytelniaina, przechodzimy do głównego program. Pojawia się okno z pięcioma zakładkami: Start, Projects, Tasks, Users oraz Sign out
+- w zakładce Start możemy dodać nowy projekt(przydatne dla nowo zarejestrowanych użytkowników)
+- w zakładce Projects możemy  dodać nowy Projekt, obejrzeć listę wszystkich projektów, kto jest liderem danego projektu, a także zobaczyć jakie Zadania zostały utworzone w ramach danego projektu i kto się nimi zajmuje.
+- w zakładce Tasks możemy dodać nowe Zadanie dla istniejącego już projektu
+- zakładka Users pokazuje nam Listę obecnie zarejestrowanych Użytkowników. W tej zakładce możemy także edytować dane wybranego użytkownika, oraz usuwać go z BD oraz programu.
+Aby dodać nowego użytkownika należy go zarejestrować(patrz Logowanie)
+- ostatnia zakładka Sign out służy do wylogowywania z programu.
+
+Niestety nasz program nie jest idealny, wymaga jeszcze duużej ilości czasu, aby dopracować go w 100% :(
+Dlatego też w niektórych miejscach możecie natknąć się na informację, że dana funkcjonalność jest ciągle w budowie i nie została jeszcze uruchomoina.
+
 Przydatne linki:
 
 Travis:

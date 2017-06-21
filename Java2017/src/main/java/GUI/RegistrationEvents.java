@@ -18,12 +18,10 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 public class RegistrationEvents implements ActionListener {
 
-    //Login loginWindow;
     Registration registrationWindow;
     RegistrationService registrationService;
 
     public RegistrationEvents(Registration registrationWindow) {
-        //this.loginWindow = loginWindow;
         this.registrationWindow = registrationWindow;
         this.registrationService = new RegistrationService();
     }

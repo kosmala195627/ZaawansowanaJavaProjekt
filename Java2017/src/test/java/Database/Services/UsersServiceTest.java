@@ -10,8 +10,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import Database.Models.User;
 
-
-
 @RunWith(MockitoJUnitRunner.class)
 public class UsersServiceTest {
 

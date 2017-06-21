@@ -7,6 +7,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.WriteResult;
 
 import Database.Models.Project;
 import Database.Models.Task;
@@ -22,10 +23,13 @@ public class MongoConnection {
 
     private DBCollection usersCollection, projectsCollection, tasksCollection, tasksUsersCollection;
     JSONTester test = new JSONTester();
-    MongoClient mongo = new MongoClient("localhost", 27017);
-    DB db = mongo.getDB("Java2017");
+    MongoClient mongo;
+    DB db;
 
     public MongoConnection() throws UnknownHostException, JsonMappingException, IOException {
+    	mongo = new MongoClient("localhost", 27017);
+    	db = mongo.getDB("Java2017");
+    	
         try {
             readUsers();
             readProjects();
@@ -83,15 +87,16 @@ public class MongoConnection {
     /**
      * * ** Insert new data to DB***
      */
-    public void insertUser(User user) throws IOException {
+    public WriteResult insertUser(User user) throws IOException {
         Collections.usersList.clear();
         BasicDBObject document = new BasicDBObject();
         document.put("firstName", user.getFirstName());
         document.put("lastName", user.getLastName());
         document.put("login", user.getLogin());
         document.put("password", user.getPassword());
-        usersCollection.insert(document);
+        WriteResult result = usersCollection.insert(document);
         readUsers();
+        return result;
     }
 
     public void insertProject(Project project) throws IOException {

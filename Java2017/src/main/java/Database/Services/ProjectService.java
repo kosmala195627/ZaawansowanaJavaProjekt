@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import Database.MongoConnection;
 import Database.Models.Project;
+import Database.Models.User;
 import GUI.RegistrationEvents;
 import java.util.ArrayList;
 
@@ -30,6 +31,15 @@ public class ProjectService {
             temp.add(x.getName());
         }
         return temp.toArray(result);
+    }
+    
+    public Project returnProject(String projectName) {
+        for (Project x : Collections.projectsList) {
+            if (x.getName().equals(projectName)) {
+                return x;
+            }
+        }
+        return null;
     }
 
     public void addNewProject(String name, String leaderId) {

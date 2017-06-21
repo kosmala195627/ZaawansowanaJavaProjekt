@@ -72,30 +72,7 @@ public class ProjectsPanel extends JPanel implements ActionListener {
             projectsCmbBox.addItem(s);
         }
         projectsCmbBox.setSelectedIndex(-1);
-        ActionListener cbActionListener = new ActionListener() {//add actionlistner to listen for change
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                projName = (String) projectsCmbBox.getSelectedItem();//get the selected item
-                System.out.println(projName);
-                model = new TableOfTasks();
-                model.add(projName);
-                final JTable tTable = new JTable();
-                tTable.setModel(model);
-                tTable.setPreferredScrollableViewportSize(new Dimension(600, 200));
-                tTable.setFillsViewportHeight(true);
-                tTable.setCellSelectionEnabled(true);
-                tTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                    public void valueChanged(ListSelectionEvent e) {
-                        selectedUser = Collections.usersList.get(tTable.getSelectedRow());
-                        System.out.println(selectedUser.getLastName());
-                    }
-                });
-                spPane = new JScrollPane(tTable);
-            }
-        };
-        projectsCmbBox.addActionListener(cbActionListener);
-
+       
         addNewProjectBtn = new JButton("Add new project");
         selectOrCreatePanel.add(addNewProjectBtn);
 
@@ -142,7 +119,7 @@ public class ProjectsPanel extends JPanel implements ActionListener {
         this.add(empty2Lbl);
         
         model = new TableOfTasks();
-        model.add(projName);
+        model.add();
         final JTable tTable = new JTable();
         tTable.setModel(model);
         tTable.setPreferredScrollableViewportSize(new Dimension(600, 200));
@@ -186,6 +163,33 @@ public class ProjectsPanel extends JPanel implements ActionListener {
         deleteBtn = new JButton("Delete task");
         buttonsPanel.add(deleteBtn);
         deleteBtn.addActionListener(this);
+        
+         ActionListener cbActionListener = new ActionListener() {//add actionlistner to listen for change
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                projName = (String) projectsCmbBox.getSelectedItem();//get the selected item
+                System.out.println(projName);
+                nameField.setText(projectService.returnProject(projName).getName());
+                /*
+                model = new TableOfTasks();
+                model.add(projName);
+                final JTable tTable = new JTable();
+                tTable.setModel(model);
+                tTable.setPreferredScrollableViewportSize(new Dimension(600, 200));
+                tTable.setFillsViewportHeight(true);
+                tTable.setCellSelectionEnabled(true);
+                tTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                tTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent e) {
+                        selectedUser = Collections.usersList.get(tTable.getSelectedRow());
+                        System.out.println(selectedUser.getLastName());
+                    }
+                    }
+                );
+                spPane = new JScrollPane(tTable);*/
+            }
+        };
+        projectsCmbBox.addActionListener(cbActionListener);
     }
 
     private void refresh() {

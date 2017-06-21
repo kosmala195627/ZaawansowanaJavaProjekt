@@ -2,6 +2,7 @@ package GUI;
 
 import Database.Models.User;
 import Database.MongoConnection;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.codehaus.jackson.map.JsonMappingException;
 
@@ -69,6 +71,8 @@ public class UpdatingUser extends JDialog implements ActionListener{
             }
             try {
                 new MongoConnection().updateInDB(user.getClass(), field, old, txtNew.getText());
+                JOptionPane.showMessageDialog(new Frame(), "Success!");
+                this.dispose();
             } catch (JsonMappingException ex) {
                 Logger.getLogger(UpdatingUser.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

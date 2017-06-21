@@ -7,6 +7,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.WriteResult;
 
 import Database.Models.Project;
 import Database.Models.Task;
@@ -15,17 +16,19 @@ import Database.Models.User;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Date;
 import org.codehaus.jackson.map.JsonMappingException;
 
 public class MongoConnection {
 
     private DBCollection usersCollection, projectsCollection, tasksCollection, tasksUsersCollection;
     JSONTester test = new JSONTester();
-    MongoClient mongo = new MongoClient("localhost", 27017);
-    DB db = mongo.getDB("Java2017");
+    MongoClient mongo;
+    DB db;
 
     public MongoConnection() throws UnknownHostException, JsonMappingException, IOException {
+    	mongo = new MongoClient("localhost", 27017);
+    	db = mongo.getDB("Java2017");
+    	
         try {
             readUsers();
             readProjects();
@@ -55,7 +58,6 @@ public class MongoConnection {
         DBCursor cursor2 = projectsCollection.find();
         while (cursor2.hasNext()) {
             DBObject obj = cursor2.next();
-            System.out.println(obj.toString());
             test.readProjectsJSON(obj.toString());
         }
     }
@@ -65,7 +67,6 @@ public class MongoConnection {
         DBCursor cursor3 = tasksCollection.find();
         while (cursor3.hasNext()) {
             DBObject obj = cursor3.next();
-            System.out.println(obj.toString());
             test.readTasksJSON(obj.toString());
         }
     }
@@ -75,7 +76,6 @@ public class MongoConnection {
         DBCursor cursor3 = tasksUsersCollection.find();
         while (cursor3.hasNext()) {
             DBObject obj = cursor3.next();
-            System.out.println(obj.toString());
             test.readTasksUsersJSON(obj.toString());
         }
     }
@@ -83,15 +83,16 @@ public class MongoConnection {
     /**
      * * ** Insert new data to DB***
      */
-    public void insertUser(User user) throws IOException {
+    public WriteResult insertUser(User user) throws IOException {
         Collections.usersList.clear();
         BasicDBObject document = new BasicDBObject();
         document.put("firstName", user.getFirstName());
         document.put("lastName", user.getLastName());
         document.put("login", user.getLogin());
         document.put("password", user.getPassword());
-        usersCollection.insert(document);
+        WriteResult result = usersCollection.insert(document);
         readUsers();
+        return result;
     }
 
     public void insertProject(Project project) throws IOException {
@@ -171,17 +172,17 @@ public class MongoConnection {
         BasicDBObject document = new BasicDBObject();
         if (obj.isAssignableFrom(User.class)) {
             Collections.usersList.clear();
-            document.put("id", Value);
+            document.put("login", Value);
             usersCollection.remove(document);
             readUsers();
         } else if (obj.isAssignableFrom(Project.class)) {
             Collections.projectsList.clear();
-            document.put("projectId", Value);
+            document.put("name", Value);
             projectsCollection.remove(document);
             readProjects();
         } else if (obj.isAssignableFrom(Task.class)) {
             Collections.tasksList.clear();
-            document.put("taskId", Value);
+            document.put("name", Value);
             tasksCollection.remove(document);
             readTasks();
         } else if (obj.isAssignableFrom(TaskUser.class)) {
